@@ -3,9 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reproductor de Radio</title>
+  <title>Mi Radio Online</title>
   <style>
     body {
+      background-image: url('https://raw.githubusercontent.com/fantasma-beep/vision-radio/main/494615713_1348055410294820_9029691649736311255_n.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       background-color: #121212;
       color: #ffffff;
       font-family: Arial, sans-serif;
@@ -17,23 +22,40 @@
     }
     .player-container {
       text-align: center;
-      padding: 20px;
-      border-radius: 10px;
-      background-color: #1e1e1e;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+      border-radius: 15px;
+      background-color: rgba(30, 30, 30, 0.85);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+    }
+    .logo {
+      margin-bottom: 25px;
+    }
+    .logo img {
+      max-width: 150px;
+      height: auto;
+      border-radius: 50%;
+      border: 3px solid #ff007f;
     }
     h1 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
+      font-size: 1.8rem;
+      margin-top: 0;
+      margin-bottom: 25px;
+      color: #ff007f;
     }
     audio {
       width: 80vw;
       max-width: 400px;
+      background-color: #333;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
   <div class="player-container">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/fantasma-beep/vision-radio/main/fondo%20blanco.png" alt="Logotipo de la Radio">
+    </div>
     <h1>Mi Radio Online</h1>
     <audio controls autoplay>
       <source src="https://stream.zeno.fm/4szh8g0tbaitv" type="audio/mpeg">
