@@ -7,70 +7,29 @@
     <meta name="theme-color" content="#1e293b"/>
     <meta name="description" content="Reproductor de streaming de Vision Studios Multimedios.">
     
-    <!-- Tailwind CSS para un diseño moderno y responsivo -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Enlace al manifest (se generará dinámicamente con JavaScript) -->
     <link rel="manifest" href="" id="manifest-link">
-    
-    <!-- Icono para iPhone y iPad -->
     <link rel="apple-touch-icon" href="logo.png">
 
     <style>
+        /* --- CORRECCIÓN: Se usa tu nueva imagen de fondo subida a GitHub --- */
         body {
-            background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.98)), url('https://images.unsplash.com/photo-1590602847991-9d6245b37410?auto=format&fit=crop&w=1920');
+            background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.98)), url('494615713_1348055410294820_9029691649736311255_n.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
-
-        input[type=range] {
-            -webkit-appearance: none;
-            appearance: none;
-            background: transparent;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        input[type=range]:focus {
-            outline: none;
-        }
-
-        input[type=range]::-webkit-slider-runnable-track {
-            background-color: #475569;
-            border-radius: 0.5rem;
-            height: 0.5rem;
-        }
-        input[type=range]::-moz-range-track {
-            background-color: #475569;
-            border-radius: 0.5rem;
-            height: 0.5rem;
-        }
-
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            margin-top: -6px;
-            background-color: #f1f5f9;
-            border-radius: 50%;
-            height: 1.25rem;
-            width: 1.25rem;
-            border: 2px solid #1e293b;
-        }
-        input[type=range]::-moz-range-thumb {
-            border: none;
-            border-radius: 50%;
-            background-color: #f1f5f9;
-            height: 1.25rem;
-            width: 1.25rem;
-            border: 2px solid #1e293b;
-        }
+        input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;width:100%}
+        input[type=range]:focus{outline:none}
+        input[type=range]::-webkit-slider-runnable-track{background-color:#475569;border-radius:.5rem;height:.5rem}
+        input[type=range]::-moz-range-track{background-color:#475569;border-radius:.5rem;height:.5rem}
+        input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;margin-top:-6px;background-color:#f1f5f9;border-radius:50%;height:1.25rem;width:1.25rem;border:2px solid #1e293b}
+        input[type=range]::-moz-range-thumb{border:none;border-radius:50%;background-color:#f1f5f9;height:1.25rem;width:1.25rem;border:2px solid #1e293b}
     </style>
 </head>
 <body class="bg-slate-900 text-slate-200 flex items-center justify-center min-h-screen font-sans antialiased p-4">
 
     <div class="w-full max-w-md">
-        <!-- Contenedor del reproductor -->
         <div class="bg-slate-800/90 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden border border-slate-700">
             
             <div class="aspect-video bg-black/50 flex items-center justify-center relative group">
@@ -82,8 +41,7 @@
             </div>
 
             <div class="p-4 text-center border-b border-slate-700">
-                <!-- --- CAMBIO DE PRUEBA: Añadido "HD" al título --- -->
-                <h3 id="track-title" class="font-bold text-lg truncate">Vision Studios HD</h3>
+                <h3 id="track-title" class="font-bold text-lg truncate">Vision Studios</h3>
                 <p id="track-artist" class="text-sm text-slate-400">Multimedios</p>
             </div>
 
@@ -97,7 +55,7 @@
                 <div class="flex items-center justify-between">
                      <div class="w-1/4"></div>
                      <div class="flex items-center gap-4 w-1/2 justify-center">
-                        <button id="play-pause-btn" class="p-4 bg-indigo-600 rounded-full hover:bg-indigo-500 active-scale-95 transition-transform disabled:opacity-50 disabled:bg-slate-600">
+                        <button id="play-pause-btn" class="p-4 bg-indigo-600 rounded-full hover:bg-indigo-500 active:scale-95 transition-transform disabled:opacity-50 disabled:bg-slate-600">
                             <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8.002v4.005a1 1 0 001.555.832l3.198-2.003a1 1 0 000-1.664l-3.198-2.003z" clip-rule="evenodd"/></svg>
                             <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 hidden" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
                         </button>
@@ -112,50 +70,28 @@
         
         <div class="mt-6 text-center">
             <button id="install-btn" class="hidden bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded-lg inline-flex items-center transition">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 <span>Instalar Aplicación</span>
             </button>
             <div id="ios-install-banner" class="hidden bg-slate-700 p-3 rounded-lg text-white text-sm flex items-center justify-center gap-3 animate-pulse">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-                <span class="text-left">Para instalar la app, toca el botón de <strong>Compartir</strong> y luego <strong>"Agregar a la pantalla de inicio"</strong>.</span>
+                <span class="text-left">Para instalar la app, toca <strong>Compartir</strong> y luego <strong>"Agregar a la pantalla de inicio"</strong>.</span>
             </div>
         </div>
     </div>
 
     <script>
-        // --- REGISTRO DEL SERVICE WORKER Y MANIFEST ---
         const manifest = {
             "name": "Vision Studios Multimedios", "short_name": "Vision", "start_url": ".", "display": "standalone",
             "background_color": "#1e293b", "theme_color": "#1e293b", "description": "Reproductor de Vision Studios.",
-            "icons": [
-                { "src": "logo.png", "type": "image/png", "sizes": "192x192" },
-                { "src": "logo.png", "type": "image/png", "sizes": "512x512" }
-            ]
+            "icons": [{"src": "logo.png", "type": "image/png", "sizes": "192x192"}, {"src": "logo.png", "type": "image/png", "sizes": "512x512"}]
         };
         const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
-        const manifestURL = URL.createObjectURL(manifestBlob);
-        document.getElementById('manifest-link').setAttribute('href', manifestURL);
+        document.getElementById('manifest-link').setAttribute('href', URL.createObjectURL(manifestBlob));
 
-        const serviceWorkerCode = `
-            const CACHE_NAME = 'pwa-media-player-cache-v12';
-            const assetsToCache = ['/', '/index.html', '/logo.png']; 
-            self.addEventListener('install', e => e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(assetsToCache))));
-            self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
-        `;
-        const swBlob = new Blob([serviceWorkerCode], { type: 'application/javascript' });
-        const swURL = URL.createObjectURL(swBlob);
+        // El código del Service Worker fue eliminado para corregir un error de registro en el navegador.
+        // Esto soluciona el error, pero la funcionalidad sin conexión (cache) ya no estará disponible.
 
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register(swURL)
-                    .then(reg => console.log('ServiceWorker registrado'))
-                    .catch(err => console.log('Fallo en registro de ServiceWorker:', err));
-            });
-        }
-
-        // --- LÓGICA DEL REPRODUCTOR ---
         const STREAM_URL = "https://stream.zeno.fm/4szh8g0tbaitv";
         const player = document.getElementById('player');
         const playPauseBtn = document.getElementById('play-pause-btn');
@@ -164,8 +100,6 @@
         const volumeControl = document.getElementById('volume-control');
         const videoOverlay = document.getElementById('video-overlay');
         const loadingText = document.getElementById('loading-text');
-
-        // --- LÓGICA DE INSTALACIÓN INTELIGENTE ---
         const installBtn = document.getElementById('install-btn');
         const iosInstallBanner = document.getElementById('ios-install-banner');
         let deferredPrompt;
@@ -183,7 +117,6 @@
         installBtn.addEventListener('click', async () => {
           if (deferredPrompt) {
             deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
             deferredPrompt = null;
             installBtn.classList.add('hidden');
           }
@@ -194,13 +127,8 @@
         }
 
         function setPlayState(isPlaying) {
-            if (isPlaying) {
-                playIcon.classList.add('hidden');
-                pauseIcon.classList.remove('hidden');
-            } else {
-                playIcon.classList.remove('hidden');
-                pauseIcon.classList.add('hidden');
-            }
+            playIcon.classList.toggle('hidden', isPlaying);
+            pauseIcon.classList.toggle('hidden', !isPlaying);
         }
         
         function loadStream() {
@@ -208,55 +136,30 @@
             player.load();
             player.play()
                 .then(() => {
-                    videoOverlay.classList.add('hidden');
+                    videoOverlay.classList.add('opacity-0');
                     setPlayState(true);
                 })
                 .catch(error => {
-                    console.log("La reproducción automática fue bloqueada.");
                     loadingText.textContent = "Haz clic en play para escuchar";
-                    videoOverlay.classList.remove('hidden');
+                    videoOverlay.classList.remove('opacity-0');
                     setPlayState(false); 
                 });
         }
 
-        playPauseBtn.addEventListener('click', () => {
-            if (player.paused) {
-                if(player.src !== STREAM_URL || player.readyState === 0){
-                    loadStream();
-                } else {
-                    player.play();
-                }
-            } else {
-                player.pause();
-            }
-        });
-
-        player.addEventListener('play', () => {
-             videoOverlay.classList.add('hidden');
-             setPlayState(true);
-        });
-        player.addEventListener('pause', () => {
-            setPlayState(false)
-        });
-        player.addEventListener('waiting', () => {
-             loadingText.textContent = "Cargando...";
-             videoOverlay.classList.remove('hidden');
-        });
-        player.addEventListener('playing', () => {
-             videoOverlay.classList.add('hidden');
-        });
-
-        volumeControl.addEventListener('input', (e) => {
-            player.volume = e.target.value / 100;
-        });
+        playPauseBtn.addEventListener('click', () => player.paused ? loadStream() : player.pause());
+        player.addEventListener('play', () => { videoOverlay.classList.add('opacity-0'); setPlayState(true); });
+        player.addEventListener('pause', () => setPlayState(false));
+        player.addEventListener('waiting', () => { loadingText.textContent = "Cargando..."; videoOverlay.classList.remove('opacity-0'); });
+        player.addEventListener('playing', () => { videoOverlay.classList.add('opacity-0'); });
+        volumeControl.addEventListener('input', (e) => { player.volume = e.target.value / 100; });
 
         window.addEventListener('DOMContentLoaded', () => {
-            videoOverlay.classList.remove('hidden');
+            videoOverlay.classList.remove('opacity-0');
             loadingText.textContent = "Haz clic en play para escuchar";
         });
-
     </script>
 </body>
 </html>
+
 
 
