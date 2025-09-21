@@ -4,14 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VISION STUDIOS RADIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary-color: #FF5733; /* Color de acento: Naranja vibrante */
-      --secondary-color: #f0f0f0;
-      --background-color: #121212;
+      --primary-color: #FFD700; /* Dorado brillante */
+      --secondary-color: #e0e0e0;
+      --background-color: #1a1a1a;
       --card-bg-color: rgba(30, 30, 30, 0.85);
-      --dark-color: #1a1a1a;
+      --dark-color: #222222;
     }
     body {
       background-image: url('https://raw.githubusercontent.com/fantasma-beep/vision-radio/main/494615713_1348055410294820_9029691649736311255_n.jpg');
@@ -21,15 +24,14 @@
       background-attachment: fixed;
       background-color: var(--background-color);
       color: var(--secondary-color);
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Poppins', sans-serif;
       display: flex;
-      flex-direction: column; /* Cambiado a columna para el banner */
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       margin: 0;
     }
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
     .player-container {
       text-align: center;
       padding: 40px;
@@ -38,7 +40,7 @@
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      margin-bottom: 20px; /* Espacio para el banner */
+      margin-bottom: 20px;
     }
     .logo-container {
       margin-bottom: 25px;
@@ -77,16 +79,19 @@
       border-right: .15em solid var(--primary-color);
       white-space: nowrap;
       margin: 0 auto;
+      font-family: 'Poppins', sans-serif;
       animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite;
     }
     h1 {
       font-size: 2rem;
+      font-weight: 700;
       margin-top: 0;
       width: 16.5em;
       color: var(--primary-color);
     }
     h2 {
       font-size: 1.5rem;
+      font-weight: 400;
       margin-top: 5px;
       margin-bottom: 30px;
       width: 13.5em;
@@ -114,7 +119,7 @@
     }
     .install-buttons a:hover {
       transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(255, 87, 51, 0.4);
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
     }
     .social-icons a {
       color: var(--secondary-color);
@@ -142,7 +147,7 @@
     }
     .play-button:hover {
       transform: scale(1.1);
-      box-shadow: 0 0 15px rgba(255, 87, 51, 0.7);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
     }
     .ad-banner {
       width: 100%;
@@ -203,7 +208,7 @@
     </div>
   </div>
   <div class="ad-banner">
-    ESPACIO PUBLICITARIO
+    ANÚNCIATE AQUÍ
   </div>
   <script>
     const audio = document.getElementById('audio-stream');
