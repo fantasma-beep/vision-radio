@@ -1,0 +1,416 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2113.65">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="es"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Reproductor Multimedia PWA&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="theme-color" content="#1e293b"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="description" content="Un reproductor multimedia PWA que funciona sin conexión."&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Tailwind CSS para un diseño moderno y responsivo --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Enlace al manifest (se generará dinámicamente con JavaScript) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="manifest" href="" id="manifest-link"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Estilos personalizados para la barra de progreso y el volumen */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input[type=range] {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>-webkit-appearance: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>appearance: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>input[type=range]:focus {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Estilo para el track (la barra) */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input[type=range]::-webkit-slider-runnable-track {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #475569;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input[type=range]::-moz-range-track {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #475569;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Estilo para el thumb (el círculo que se desliza) */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input[type=range]::-webkit-slider-thumb {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>-webkit-appearance: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>appearance: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: -6px; /* Centrar verticalmente */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f1f5f9;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #1e293b;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input[type=range]::-moz-range-thumb {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f1f5f9;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #1e293b;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="bg-slate-900 text-slate-200 flex items-center justify-center min-h-screen font-sans antialiased p-4"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="w-full max-w-md bg-slate-800 rounded-2xl shadow-2xl overflow-hidden"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Pantalla del reproductor --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="aspect-video bg-black flex items-center justify-center relative group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;video id="player" class="w-full h-full"&gt;&lt;/video&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="video-overlay" class="absolute inset-0 bg-slate-900/50 flex flex-col items-center justify-center text-center p-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>&lt;svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-music-note-beamed" viewBox="0 0 16 16"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;path d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13c0-1.104 1.12-2 2.5-2s2.5.896 2.5 2zm9-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2z"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;path fill-rule="evenodd" d="M14 11V2h1v9h-1zM6 3v10H5V3h1z"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;path d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3L5 4V2.905z"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-xl font-bold mt-4"&gt;Reproductor PWA&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-slate-400 mt-1"&gt;Selecciona tus archivos para comenzar&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Información de la pista actual --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="p-4 text-center border-b border-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 id="track-title" class="font-bold text-lg truncate"&gt;Ningún archivo seleccionado&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p id="track-artist" class="text-sm text-slate-400"&gt;--&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Controles --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="p-4 space-y-4 bg-slate-800/50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Barra de progreso --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span id="current-time" class="text-xs w-10 text-center"&gt;0:00&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;input type="range" id="progress-bar" value="0" min="0" max="100" class="w-full"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span id="total-time" class="text-xs w-10 text-center"&gt;0:00&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Botones principales y volumen --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex items-center justify-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>&lt;div class="w-1/4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>&lt;!-- Espacio en blanco para centrar los controles --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>&lt;div class="flex items-center gap-4 w-1/2 justify-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button id="prev-btn" class="p-2 rounded-full hover:bg-slate-700 active:scale-95 transition-transform disabled:opacity-50 disabled:cursor-not-allowed" disabled&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"&gt;&lt;path d="M8.445 14.832A1 1 0 0010 14.002V5.998a1 1 0 00-1.555-.832L4.16 9.166a1 1 0 000 1.664l4.285 3.999zM11.555 5.166a1 1 0 00-1.555.832v8.004a1 1 0 001.555.832l4.285-3.999a1 1 0 000-1.664l-4.285-4z"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button id="play-pause-btn" class="p-4 bg-indigo-600 rounded-full hover:bg-indigo-500 active:scale-95 transition-transform disabled:opacity-50 disabled:bg-slate-600" disabled&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor"&gt;&lt;path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8.002v4.005a1 1 0 001.555.832l3.198-2.003a1 1 0 000-1.664l-3.198-2.003z" clip-rule="evenodd"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 hidden" viewBox="0 0 20 20" fill="currentColor"&gt;&lt;path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button id="next-btn" class="p-2 rounded-full hover:bg-slate-700 active:scale-95 transition-transform disabled:opacity-50 disabled:cursor-not-allowed" disabled&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                       </span>&lt;svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"&gt;&lt;path d="M4.555 5.166A1 1 0 016 5.998v8.004a1 1 0 01-1.445.832L.27 10.832a1 1 0 010-1.664l4.285-4.002zM14.73 9.168a1 1 0 010 1.664l-4.285 4A1 1 0 019 14.002V5.998a1 1 0 011.445-.832l4.285 4.002z"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="w-1/4 flex items-center justify-end gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" viewBox="0 0 20 20" fill="currentColor"&gt;&lt;path d="M5.071 8.238a.75.75 0 01.093-1.055l1.5-1.5A.75.75 0 017.72 6.74l-1.5 1.5a.75.75 0 01-1.054.093zm.593 4.586a.75.75 0 011.06-1.06l1.25 1.25a.75.75 0 11-1.06 1.06l-1.25-1.25zM12 8a1 1 0 100-2 1 1 0 000 2zM4 10a1 1 0 11-2 0 1 1 0 012 0zm11.13-1.13a.75.75 0 10-1.06-1.06l-1.25 1.25a.75.75 0 001.06 1.06l1.25-1.25zM12 4a1 1 0 100 2 1 1 0 000-2zm-8 6a1 1 0 100 2 1 1 0 000-2z"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="range" id="volume-control" value="100" min="0" max="100" class="w-24"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Lista de reproducción y botón para añadir archivos --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="p-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label for="file-input" class="w-full text-center block bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded-lg cursor-pointer transition-colors"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>Añadir Archivos</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="file" id="file-input" multiple accept="audio/*,video/*" class="hidden"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="playlist" class="mt-2 max-h-40 overflow-y-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Las pistas se añadirán aquí --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// --- REGISTRO DEL SERVICE WORKER Y MANIFEST ---</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// 1. Generar y registrar el Manifest dinámicamente</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const manifest = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"name": "Reproductor Multimedia PWA",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"short_name": "Reproductor",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"start_url": ".",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"display": "standalone",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"background_color": "#1e293b",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"theme_color": "#1e293b",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"description": "Un reproductor multimedia PWA que funciona sin conexión.",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"icons": [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ "src": "https://placehold.co/192x192/1e293b/f1f5f9?text=PWA", "type": "image/png", "sizes": "192x192" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ "src": "https://placehold.co/512x512/1e293b/f1f5f9?text=PWA", "type": "image/png", "sizes": "512x512" }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>]</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const manifestURL = URL.createObjectURL(manifestBlob);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('manifest-link').setAttribute('href', manifestURL);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// 2. Generar y registrar el Service Worker dinámicamente</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const serviceWorkerCode = `</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const CACHE_NAME = 'pwa-media-player-cache-v1';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const urlsToCache = [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'/',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'/index.html' // Aunque es la misma página, es bueno tenerla explícita</p>
+<p class="p1"><span class="Apple-converted-space">            </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>self.addEventListener('install', event =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>event.waitUntil(</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>caches.open(CACHE_NAME)</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>.then(cache =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>console.log('Cache abierto');</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>// Nota: No podemos cachear la página principal aquí porque es la que registra el SW.</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>// Se cacheará en la primera visita.</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>return Promise.resolve();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>})</p>
+<p class="p1"><span class="Apple-converted-space">                </span>);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>self.addEventListener('fetch', event =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>event.respondWith(</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>caches.match(event.request)</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>.then(response =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>if (response) {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>return response; // Servir desde la caché</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>// Si no está en caché, ir a la red</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>return fetch(event.request).then(</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>(response) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>// Comprobar si recibimos una respuesta válida</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>if(!response || response.status !== 200 || response.type !== 'basic') {</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>return response;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>// Importante: Clonar la respuesta. Una respuesta es un stream</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>// y solo se puede consumir una vez. Necesitamos una para el navegador</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>// y otra para la caché.</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>const responseToCache = response.clone();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>caches.open(CACHE_NAME)</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>.then(cache =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                                            </span>// Solo cacheamos la página principal para el modo offline.</p>
+<p class="p1"><span class="Apple-converted-space">                                            </span>// Los archivos multimedia son manejados por el usuario.</p>
+<p class="p1"><span class="Apple-converted-space">                                            </span>if (event.request.mode === 'navigate') {</p>
+<p class="p1"><span class="Apple-converted-space">                                               </span>cache.put(event.request, responseToCache);</p>
+<p class="p1"><span class="Apple-converted-space">                                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>return response;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>})</p>
+<p class="p1"><span class="Apple-converted-space">                </span>);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>self.addEventListener('activate', event =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>const cacheWhitelist = [CACHE_NAME];</p>
+<p class="p1"><span class="Apple-converted-space">              </span>event.waitUntil(</p>
+<p class="p1"><span class="Apple-converted-space">                </span>caches.keys().then(cacheNames =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>return Promise.all(</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>cacheNames.map(cacheName =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>if (cacheWhitelist.indexOf(cacheName) === -1) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>return caches.delete(cacheName);</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>})</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>})</p>
+<p class="p1"><span class="Apple-converted-space">              </span>);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const swBlob = new Blob([serviceWorkerCode], { type: 'application/javascript' });</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const swURL = URL.createObjectURL(swBlob);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>if ('serviceWorker' in navigator) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>window.addEventListener('load', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>navigator.serviceWorker.register(swURL)</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>.then(registration =&gt; console.log('ServiceWorker registrado con éxito:', registration))</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>.catch(error =&gt; console.log('Fallo en el registro de ServiceWorker:', error));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// --- LÓGICA DEL REPRODUCTOR ---</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const player = document.getElementById('player');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const playPauseBtn = document.getElementById('play-pause-btn');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const playIcon = document.getElementById('play-icon');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const pauseIcon = document.getElementById('pause-icon');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const prevBtn = document.getElementById('prev-btn');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const nextBtn = document.getElementById('next-btn');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const progressBar = document.getElementById('progress-bar');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const currentTimeEl = document.getElementById('current-time');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const totalTimeEl = document.getElementById('total-time');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const volumeControl = document.getElementById('volume-control');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const fileInput = document.getElementById('file-input');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const playlistEl = document.getElementById('playlist');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const trackTitleEl = document.getElementById('track-title');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const trackArtistEl = document.getElementById('track-artist');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const videoOverlay = document.getElementById('video-overlay');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>let playlist = [];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentTrackIndex = -1;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let isSeeking = false;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Formatear tiempo de segundos a MM:SS</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function formatTime(seconds) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const minutes = Math.floor(seconds / 60);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const secs = Math.floor(seconds % 60);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return `${minutes}:${secs &lt; 10 ? '0' : ''}${secs}`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Actualizar UI con la información de la pista</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateTrackInfo() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (currentTrackIndex !== -1) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const track = playlist[currentTrackIndex];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>trackTitleEl.textContent = track.name.replace(/\.[^/.]+$/, "");</p>
+<p class="p1"><span class="Apple-converted-space">                </span>trackArtistEl.textContent = 'Archivo local'; // Podríamos intentar leer metadatos en el futuro</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>trackTitleEl.textContent = 'Ningún archivo seleccionado';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>trackArtistEl.textContent = '--';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Cargar y reproducir una pista</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function loadTrack(index) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (index &gt;= 0 &amp;&amp; index &lt; playlist.length) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>currentTrackIndex = index;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const fileURL = URL.createObjectURL(playlist[index]);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>player.src = fileURL;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>player.load();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>player.play()</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>.then(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>videoOverlay.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>setPlayState(true);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>})</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>.catch(e =&gt; console.error("Error al reproducir:", e));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>updateTrackInfo();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>updatePlaylistUI();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>updateNavButtons();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Habilitar/Deshabilitar botones de navegación</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateNavButtons() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>prevBtn.disabled = currentTrackIndex &lt;= 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>nextBtn.disabled = currentTrackIndex &gt;= playlist.length - 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>playPauseBtn.disabled = playlist.length === 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Cambiar entre icono de play y pause</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function setPlayState(isPlaying) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (isPlaying) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>playIcon.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>pauseIcon.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>playIcon.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>pauseIcon.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Crear la UI de la lista de reproducción</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updatePlaylistUI() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>playlistEl.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>playlist.forEach((file, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const item = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>item.className = `p-2 my-1 rounded-md cursor-pointer flex justify-between items-center transition-colors ${index === currentTrackIndex ? 'bg-indigo-600 text-white' : 'hover:bg-slate-700'}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>item.textContent = file.name;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>item.onclick = () =&gt; loadTrack(index);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>playlistEl.appendChild(item);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Event Listeners</p>
+<p class="p1"><span class="Apple-converted-space">        </span>playPauseBtn.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (player.paused) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>player.play();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>player.pause();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>player.addEventListener('play', () =&gt; setPlayState(true));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>player.addEventListener('pause', () =&gt; setPlayState(false));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>prevBtn.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (currentTrackIndex &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadTrack(currentTrackIndex - 1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>nextBtn.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (currentTrackIndex &lt; playlist.length - 1) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadTrack(currentTrackIndex + 1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>player.addEventListener('ended', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Reproducir siguiente pista automáticamente</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (currentTrackIndex &lt; playlist.length - 1) {</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>loadTrack(currentTrackIndex + 1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>setPlayState(false);</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>videoOverlay.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>player.addEventListener('loadedmetadata', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>totalTimeEl.textContent = formatTime(player.duration);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>progressBar.max = player.duration;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>player.addEventListener('timeupdate', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!isSeeking) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>currentTimeEl.textContent = formatTime(player.currentTime);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>progressBar.value = player.currentTime;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>progressBar.addEventListener('input', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>isSeeking = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentTimeEl.textContent = formatTime(e.target.value);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>progressBar.addEventListener('change', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>player.currentTime = e.target.value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>isSeeking = false;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>volumeControl.addEventListener('input', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>player.volume = e.target.value / 100;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>fileInput.addEventListener('change', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const newFiles = Array.from(e.target.files);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const wasEmpty = playlist.length === 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>playlist.push(...newFiles);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updatePlaylistUI();</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (wasEmpty &amp;&amp; playlist.length &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadTrack(0);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">             </span>updateNavButtons();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
