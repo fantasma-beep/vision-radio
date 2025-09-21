@@ -1,270 +1,211 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VISION STUDIOS RADIO</title>
-  
-  <link rel="manifest" href="manifest.json">
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js')
-          .then(registration => {
-            console.log('Service Worker registrado con éxito:', registration);
-          })
-          .catch(error => {
-            console.log('Fallo en el registro del Service Worker:', error);
-          });
-      });
-    }
-  </script>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdgAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
-  <style>
-    :root {
-      --primary-color: #FFD700; /* Dorado */
-      --secondary-color: #e0e0e0; /* Gris claro para texto */
-      --background-color: #1a1a1a; /* Fondo oscuro principal */
-      --card-bg-color: rgba(30, 30, 30, 0.7); /* Fondo de tarjeta translúcido */
-      --dark-color: #222222; /* Color oscuro para algunos elementos */
-    }
-    body {
-      background-image: url('494615713_1348055410294820_9029691649736311255_n.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-color: var(--background-color); /* Fallback si la imagen no carga */
-      color: var(--secondary-color);
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      overflow-x: hidden; /* Previene el scroll horizontal */
-    }
-    .player-container {
-      text-align: center;
-      padding: 40px;
-      border-radius: 20px;
-      background-color: var(--card-bg-color);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(10px); /* Efecto de cristal esmerilado */
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      margin-bottom: 20px;
-      max-width: 90%; /* Ajuste para responsividad */
-      box-sizing: border-box;
-    }
-    .logo-container {
-      margin-bottom: 25px;
-      position: relative;
-      display: inline-block;
-    }
-    .vinyl-record {
-      width: 220px;
-      height: 220px;
-      background-color: #0d0d0d;
-      border-radius: 50%;
-      border: 8px solid var(--primary-color);
-      box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      animation: spin 6s linear infinite;
-      /* Por defecto la animación se pausará con JS al cargar */
-    }
-    .vinyl-record-label {
-      width: 110px;
-      height: 110px;
-      background-color: white;
-      border-radius: 50%;
-      border: 4px solid var(--primary-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .vinyl-record-label img {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      object-fit: cover; /* Asegura que la imagen de logo se ajuste bien */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-    h1, h2 {
-      overflow: hidden;
-      white-space: nowrap;
-      margin: 0 auto;
-      font-family: 'Poppins', sans-serif;
-      animation: typing 3.5s steps(30, end) forwards, blink-caret .75s step-end infinite;
-      color: white;
-      text-shadow: 2px 2px 4px black;
-      max-width: 100%; /* Para responsividad, evita desbordamiento */
-    }
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-top: 0;
-      width: fit-content; /* Ajusta el ancho al contenido de la animación */
-    }
-    h2 {
-      font-size: 1.5rem;
-      font-weight: 400;
-      margin-top: 5px;
-      margin-bottom: 30px;
-      width: fit-content; /* Ajusta el ancho al contenido de la animación */
-      animation-delay: 3.5s;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Ke Buena 92.3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="theme-color" content="#FF8C00"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
 
-    .install-buttons, .social-icons {
-      margin-top: 25px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
-      gap: 15px; /* Espacio entre los botones */
-    }
-    .install-buttons a, #install-android-btn {
-      display: inline-flex; /* Usar flex para centrar icono y texto si lo hay */
-      justify-content: center;
-      align-items: center;
-      border-radius: 10px;
-      padding: 12px 25px;
-      font-size: 1.5rem;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      border: none; /* Asegura que no hay borde en el botón de Android */
-      cursor: pointer;
-      white-space: nowrap; /* Evita que el texto del botón se rompa */
-    }
-    .install-buttons a:hover, #install-android-btn:hover {
-      transform: translateY(-3px);
-    }
-    .install-buttons .fa-apple { /* Asegura que el botón de Apple tenga el estilo correcto */
-      background-color: white;
-      color: #0d0d0d;
-    }
-    #install-android-btn {
-      background-color: var(--primary-color);
-      color: var(--dark-color);
-      display: none; /* Por defecto oculto, se mostrará con JS si es instalable */
-    }
-    .social-icons a {
-      color: var(--secondary-color);
-      font-size: 2rem;
-      margin: 0 15px;
-      transition: color 0.3s ease, transform 0.2s ease;
-    }
-    .social-icons a:hover {
-      color: var(--primary-color);
-      transform: scale(1.2);
-    }
-    .radio-player-custom {
-      margin-top: 30px;
-    }
-    .play-button {
-      background: var(--primary-color);
-      color: var(--dark-color);
-      border: none;
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      font-size: 2.5rem;
-      cursor: pointer;
-      transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
-    }
-    .play-button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
-    }
-    .ad-banner {
-      width: 100%;
-      max-width: 500px;
-      height: 100px;
-      background-color: rgba(255, 255, 255, 0.1);
-      border: 2px dashed var(--primary-color);
-      color: var(--secondary-color);
-      font-size: 1.2rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 20px;
-      border-radius: 10px;
-      text-transform: uppercase;
-    }
-    audio {
-      display: none;
-    }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: var(--primary-color); }
-    }
+        /* Oculta los elementos que no son PWA cuando no están en la pantalla de inicio */
+        @media all and (display-mode: standalone) {
+            body {
+                background-color: #FF8C00; /* Color de fondo cuando la app está instalada */
+            }
+        }
+    </style>
+</head>
+<body class="bg-orange-600 flex items-center justify-center min-h-screen p-4">
 
-    /* Media queries para responsividad */
-    @media (max-width: 768px) {
-      .player-container {
-        padding: 30px;
-      }
-      .vinyl-record {
-        width: 180px;
-        height: 180px;
-        border-width: 6px;
-      }
-      .vinyl-record-label {
-        width: 90px;
-        height: 90px;
-        border-width: 3px;
-      }
-      .vinyl-record-label img {
-        width: 75px;
-        height: 75px;
-      }
-      h1 {
-        font-size: 1.7rem;
-        /* Reajustar width para animación typing en móviles si es necesario */
-      }
-      h2 {
-        font-size: 1.2rem;
-        /* Reajustar width para animación typing en móviles si es necesario */
-      }
-      .play-button {
-        width: 70px;
-        height: 70px;
-        font-size: 2rem;
-      }
-      .install-buttons a, #install-android-btn {
-        padding: 10px 20px;
-        font-size: 1.2rem;
-      }
-      .social-icons a {
-        font-size: 1.8rem;
-        margin: 0 10px;
-      }
-      .ad-banner {
-        height: 80px;
-        font-size: 1rem;
-      }
-    }
+    <div id="app" class="bg-white rounded-3xl shadow-2xl p-6 w-full max-w-sm text-center transform transition-all duration-500 hover:scale-105">
+        
+        <!-- Logo de la estación -->
+        <img id="radio-logo" class="w-48 h-48 mx-auto mb-6 rounded-full shadow-lg border-4 border-white transform transition-transform duration-500 hover:rotate-3" 
+             src="https://storage.googleapis.com/gfg-a-01/c83434f9-d8c1-4768-8ccc-5f1036b2624b"
+             alt="Logo de La Ke Buena 92.3">
 
-    @media (max-width: 480px) {
-      .player-container {
-        padding: 20px;
-      }
-      .vinyl-record {
-        width: 150px;
+        <!-- Título de la estación -->
+        <h1 class="text-3xl font-extrabold text-orange-700 mb-2">La Ke Buena 92.3</h1>
+        <p class="text-sm text-gray-600 mb-6">El Fantasma de la Radio</p>
+
+        <!-- Contenedor del reproductor de audio -->
+        <div class="audio-player bg-orange-100 rounded-full p-2 flex items-center justify-between shadow-inner mb-6">
+            <button id="play-btn" class="bg-orange-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-md transform transition-transform duration-300 active:scale-95">
+                <i class="fas fa-play text-xl" id="play-icon"></i>
+            </button>
+            <div class="flex-1 mx-4 text-orange-800 font-bold">
+                <p id="status-text">Presiona Play</p>
+            </div>
+            <button id="volume-btn" class="text-gray-600 w-10 h-10 rounded-full flex items-center justify-center">
+                <i id="volume-icon" class="fas fa-volume-up"></i>
+            </button>
+        </div>
+
+        <!-- Enlaces a redes sociales y contacto -->
+        <div class="flex justify-around text-xl text-gray-500">
+            <a href="#" class="hover:text-orange-600 transform transition-transform duration-200 hover:scale-110">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="#" class="hover:text-orange-600 transform transition-transform duration-200 hover:scale-110">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="hover:text-orange-600 transform transition-transform duration-200 hover:scale-110">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="hover:text-orange-600 transform transition-transform duration-200 hover:scale-110">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Contenedor para mensajes de usuario -->
+    <div id="message-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-sm py-2 px-4 rounded-full opacity-0 transition-opacity duration-300 z-50"></div>
+
+    <script>
+        // Configuración de la URL del stream de radio
+        const RADIO_STREAM_URL = 'https://stream.zeno.fm/4szh8g0tbaitv'; // Reemplaza con la URL de tu stream de radio
+        const AUDIO_CONTEXT = new (window.AudioContext || window.webkitAudioContext)();
+        const AUDIO = new Audio();
+        AUDIO.crossOrigin = 'anonymous'; // Necesario para evitar CORS
+        AUDIO.volume = 0.5;
+        let isPlaying = false;
+        let isMuted = false;
+
+        const playBtn = document.getElementById('play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const statusText = document.getElementById('status-text');
+        const volumeBtn = document.getElementById('volume-btn');
+        const volumeIcon = document.getElementById('volume-icon');
+        const radioLogo = document.getElementById('radio-logo');
+
+        // Función para mostrar mensajes temporales al usuario
+        function showMessage(message) {
+            const messageBox = document.getElementById('message-box');
+            messageBox.textContent = message;
+            messageBox.style.opacity = 1;
+            setTimeout(() => {
+                messageBox.style.opacity = 0;
+            }, 3000);
+        }
+
+        // Control del botón de Play/Pausa
+        playBtn.addEventListener('click', () => {
+            if (AUDIO.src !== RADIO_STREAM_URL) {
+                AUDIO.src = RADIO_STREAM_URL;
+                AUDIO.load();
+            }
+
+            if (isPlaying) {
+                AUDIO.pause();
+                playIcon.classList.remove('fa-pause');
+                playIcon.classList.add('fa-play');
+                statusText.textContent = 'Pausado';
+                radioLogo.classList.remove('animate-spin');
+                isPlaying = false;
+            } else {
+                const playPromise = AUDIO.play();
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            playIcon.classList.remove('fa-play');
+                            playIcon.classList.add('fa-pause');
+                            statusText.textContent = '¡Al aire!';
+                            radioLogo.classList.add('animate-spin');
+                            isPlaying = true;
+                        })
+                        .catch(error => {
+                            console.error('Error al reproducir el audio:', error);
+                            statusText.textContent = 'Error al reproducir';
+                            showMessage('No se pudo reproducir. Intenta de nuevo más tarde.');
+                        });
+                }
+            }
+        });
+
+        // Control del volumen
+        volumeBtn.addEventListener('click', () => {
+            if (isMuted) {
+                AUDIO.volume = 0.5; // Restaura el volumen a la mitad
+                volumeIcon.classList.remove('fa-volume-mute');
+                volumeIcon.classList.add('fa-volume-up');
+                isMuted = false;
+                showMessage('Sonido activado');
+            } else {
+                AUDIO.volume = 0; // Silencia el audio
+                volumeIcon.classList.remove('fa-volume-up');
+                volumeIcon.classList.add('fa-volume-mute');
+                isMuted = true;
+                showMessage('Sonido silenciado');
+            }
+        });
+
+        // Simula la rotación del logo
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            .animate-spin {
+                animation: spin 3s linear infinite;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Service Worker para PWA
+        if ('serviceWorker' in navigator) {
+            const serviceWorkerCode = `
+                const CACHE_NAME = 'radio-cache-v1';
+                const urlsToCache = [
+                    './',
+                    './radio_app.html',
+                    'https://cdn.tailwindcss.com',
+                    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'
+                ];
+
+                self.addEventListener('install', (event) => {
+                    event.waitUntil(
+                        caches.open(CACHE_NAME)
+                            .then((cache) => {
+                                console.log('Cache abierto');
+                                return cache.addAll(urlsToCache);
+                            })
+                    );
+                });
+
+                self.addEventListener('fetch', (event) => {
+                    event.respondWith(
+                        caches.match(event.request)
+                            .then((response) => {
+                                if (response) {
+                                    return response;
+                                }
+                                return fetch(event.request);
+                            })
+                    );
+                });
+            `;
+            
+            const serviceWorkerBlob = new Blob([serviceWorkerCode], { type: 'application/javascript' });
+            const serviceWorkerUrl = URL.createObjectURL(serviceWorkerBlob);
+
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register(serviceWorkerUrl)
+                    .then(registration => {
+                        console.log('Service Worker registrado con éxito:', registration);
+                    })
+                    .catch(error => {
+                        console.error('Fallo el registro del Service Worker:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
