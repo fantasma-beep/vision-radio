@@ -1,1 +1,270 @@
-<!DOCTYPE html> <html lang="es"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Instalar en iOS</title> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <style> :root { --primary-color: #FFD700; --secondary-color: #e0e0e0; --background-color: #1a1a1a; --card-bg-color: rgba(30, 30, 30, 0.7); } body { background-color: var(--background-color); color: var(--secondary-color); font-family: 'Poppins', sans-serif; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; text-align: center; } .content-container { max-width: 600px; padding: 30px; border-radius: 15px; background-color: var(--card-bg-color); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.1); } h1 { color: var(--primary-color); font-weight: 700; font-size: 2.5rem; margin-bottom: 20px; } p { font-size: 1.1rem; line-height: 1.6; } ol { text-align: left; margin: 20px 0; padding-left: 20px; } li { margin-bottom: 15px; font-size: 1rem; } .step-icon { color: var(--primary-color); font-size: 1.2rem; margin-right: 10px; } .share-icon-img { height: 24px; vertical-align: middle; margin: 0 5px; } .home-screen-img { height: 24px; vertical-align: middle; margin: 0 5px; } a.back-link { color: var(--primary-color); margin-top: 20px; text-decoration: none; font-weight: 600; display: inline-block; transition: transform 0.2s ease-in-out; } a.back-link:hover { transform: scale(1.05); } </style> </head> <body> <div class="content-container"> <h1>Instalar en iPhone</h1> <p>Para añadir nuestra app a tu pantalla de inicio en un dispositivo iOS, sigue estos sencillos pasos:</p> <ol> <li><span class="step-icon"><i class="fas fa-1"></i></span> Abre este sitio web en el navegador Safari.</li> <li><span class="step-icon"><i class="fas fa-2"></i></span> Toca el ícono de **Compartir** en la parte inferior de la pantalla. Se parece a un cuadrado con una flecha que apunta hacia arriba.</li> <li><span class="step-icon"><i class="fas fa-3"></i></span> Desplázate hacia abajo y selecciona **"Añadir a pantalla de inicio"**.</li> <li><span class="step-icon"><i class="fas fa-4"></i></span> Puedes cambiar el nombre si lo deseas y luego toca **"Añadir"** en la esquina superior derecha.</li> </ol> <p>¡Nuestra app aparecerá en tu pantalla de inicio y podrás acceder a ella fácilmente!</p> <a href="https://vision-studios-radio.github.io/mpwa/index.html" class="back-link"> <i class="fas fa-arrow-left"></i> Volver a la radio </a> </div> </body> </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VISION STUDIOS RADIO</title>
+  
+  <link rel="manifest" href="manifest.json">
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(registration => {
+            console.log('Service Worker registrado con éxito:', registration);
+          })
+          .catch(error => {
+            console.log('Fallo en el registro del Service Worker:', error);
+          });
+      });
+    }
+  </script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdgAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <style>
+    :root {
+      --primary-color: #FFD700; /* Dorado */
+      --secondary-color: #e0e0e0; /* Gris claro para texto */
+      --background-color: #1a1a1a; /* Fondo oscuro principal */
+      --card-bg-color: rgba(30, 30, 30, 0.7); /* Fondo de tarjeta translúcido */
+      --dark-color: #222222; /* Color oscuro para algunos elementos */
+    }
+    body {
+      background-image: url('494615713_1348055410294820_9029691649736311255_n.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-color: var(--background-color); /* Fallback si la imagen no carga */
+      color: var(--secondary-color);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden; /* Previene el scroll horizontal */
+    }
+    .player-container {
+      text-align: center;
+      padding: 40px;
+      border-radius: 20px;
+      background-color: var(--card-bg-color);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px); /* Efecto de cristal esmerilado */
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
+      max-width: 90%; /* Ajuste para responsividad */
+      box-sizing: border-box;
+    }
+    .logo-container {
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+    }
+    .vinyl-record {
+      width: 220px;
+      height: 220px;
+      background-color: #0d0d0d;
+      border-radius: 50%;
+      border: 8px solid var(--primary-color);
+      box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: spin 6s linear infinite;
+      /* Por defecto la animación se pausará con JS al cargar */
+    }
+    .vinyl-record-label {
+      width: 110px;
+      height: 110px;
+      background-color: white;
+      border-radius: 50%;
+      border: 4px solid var(--primary-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .vinyl-record-label img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover; /* Asegura que la imagen de logo se ajuste bien */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    h1, h2 {
+      overflow: hidden;
+      white-space: nowrap;
+      margin: 0 auto;
+      font-family: 'Poppins', sans-serif;
+      animation: typing 3.5s steps(30, end) forwards, blink-caret .75s step-end infinite;
+      color: white;
+      text-shadow: 2px 2px 4px black;
+      max-width: 100%; /* Para responsividad, evita desbordamiento */
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 0;
+      width: fit-content; /* Ajusta el ancho al contenido de la animación */
+    }
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-top: 5px;
+      margin-bottom: 30px;
+      width: fit-content; /* Ajusta el ancho al contenido de la animación */
+      animation-delay: 3.5s;
+    }
+
+    .install-buttons, .social-icons {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+      gap: 15px; /* Espacio entre los botones */
+    }
+    .install-buttons a, #install-android-btn {
+      display: inline-flex; /* Usar flex para centrar icono y texto si lo hay */
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      padding: 12px 25px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      border: none; /* Asegura que no hay borde en el botón de Android */
+      cursor: pointer;
+      white-space: nowrap; /* Evita que el texto del botón se rompa */
+    }
+    .install-buttons a:hover, #install-android-btn:hover {
+      transform: translateY(-3px);
+    }
+    .install-buttons .fa-apple { /* Asegura que el botón de Apple tenga el estilo correcto */
+      background-color: white;
+      color: #0d0d0d;
+    }
+    #install-android-btn {
+      background-color: var(--primary-color);
+      color: var(--dark-color);
+      display: none; /* Por defecto oculto, se mostrará con JS si es instalable */
+    }
+    .social-icons a {
+      color: var(--secondary-color);
+      font-size: 2rem;
+      margin: 0 15px;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+    .social-icons a:hover {
+      color: var(--primary-color);
+      transform: scale(1.2);
+    }
+    .radio-player-custom {
+      margin-top: 30px;
+    }
+    .play-button {
+      background: var(--primary-color);
+      color: var(--dark-color);
+      border: none;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+    }
+    .play-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+    }
+    .ad-banner {
+      width: 100%;
+      max-width: 500px;
+      height: 100px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 2px dashed var(--primary-color);
+      color: var(--secondary-color);
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      border-radius: 10px;
+      text-transform: uppercase;
+    }
+    audio {
+      display: none;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: var(--primary-color); }
+    }
+
+    /* Media queries para responsividad */
+    @media (max-width: 768px) {
+      .player-container {
+        padding: 30px;
+      }
+      .vinyl-record {
+        width: 180px;
+        height: 180px;
+        border-width: 6px;
+      }
+      .vinyl-record-label {
+        width: 90px;
+        height: 90px;
+        border-width: 3px;
+      }
+      .vinyl-record-label img {
+        width: 75px;
+        height: 75px;
+      }
+      h1 {
+        font-size: 1.7rem;
+        /* Reajustar width para animación typing en móviles si es necesario */
+      }
+      h2 {
+        font-size: 1.2rem;
+        /* Reajustar width para animación typing en móviles si es necesario */
+      }
+      .play-button {
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+      }
+      .install-buttons a, #install-android-btn {
+        padding: 10px 20px;
+        font-size: 1.2rem;
+      }
+      .social-icons a {
+        font-size: 1.8rem;
+        margin: 0 10px;
+      }
+      .ad-banner {
+        height: 80px;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .player-container {
+        padding: 20px;
+      }
+      .vinyl-record {
+        width: 150px;
