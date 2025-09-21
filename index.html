@@ -13,7 +13,7 @@
     <!-- Enlace al manifest (se generará dinámicamente con JavaScript) -->
     <link rel="manifest" href="" id="manifest-link">
     
-    <!-- --- NUEVO: ICONO PARA IPHONE Y IPAD --- -->
+    <!-- Icono para iPhone y iPad -->
     <link rel="apple-touch-icon" href="logo.png">
 
     <style>
@@ -73,11 +73,16 @@
         <!-- Contenedor del reproductor -->
         <div class="bg-slate-800/90 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden border border-slate-700">
             
+            <!-- --- CORRECCIÓN: El logo ahora está separado del overlay para que siempre sea visible --- -->
             <div class="aspect-video bg-black/50 flex items-center justify-center relative group">
-                <audio id="player" class="w-full h-full" crossOrigin="anonymous"></audio>
-                <div id="video-overlay" class="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
-                     <img src="logo.png" alt="Vision Studios Logo" class="w-32 h-32 object-contain rounded-md shadow-lg">
-                    <h2 id="loading-text" class="text-xl font-bold mt-4 text-white">Cargando streaming...</h2>
+                <!-- El logo ahora está aquí, como un elemento visual principal -->
+                <img src="logo.png" alt="Vision Studios Logo" class="w-32 h-32 object-contain rounded-md shadow-lg transition-opacity duration-300">
+
+                <audio id="player" class="w-full h-full hidden" crossOrigin="anonymous"></audio>
+                
+                <!-- El overlay solo tiene el texto y se superpone al logo al cargar -->
+                <div id="video-overlay" class="absolute inset-0 bg-slate-800/80 backdrop-blur-sm flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300">
+                    <h2 id="loading-text" class="text-xl font-bold text-white">Cargando streaming...</h2>
                 </div>
             </div>
 
@@ -142,7 +147,7 @@
         document.getElementById('manifest-link').setAttribute('href', manifestURL);
 
         const serviceWorkerCode = `
-            const CACHE_NAME = 'pwa-media-player-cache-v10';
+            const CACHE_NAME = 'pwa-media-player-cache-v11';
             const assetsToCache = ['/', '/index.html', '/logo.png']; 
             self.addEventListener('install', e => e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(assetsToCache))));
             self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
@@ -220,6 +225,7 @@
                 .catch(error => {
                     console.log("La reproducción automática fue bloqueada.");
                     loadingText.textContent = "Haz clic en play para escuchar";
+                    videoOverlay.classList.remove('hidden');
                     setPlayState(false); 
                 });
         }
@@ -240,7 +246,9 @@
              videoOverlay.classList.add('hidden');
              setPlayState(true);
         });
-        player.addEventListener('pause', () => setPlayState(false));
+        player.addEventListener('pause', () => {
+            setPlayState(false)
+        });
         player.addEventListener('waiting', () => {
              loadingText.textContent = "Cargando...";
              videoOverlay.classList.remove('hidden');
@@ -253,7 +261,11 @@
             player.volume = e.target.value / 100;
         });
 
-        window.addEventListener('DOMContentLoaded', loadStream);
+        // Inicia la carga cuando la página esté lista, pero muestra el overlay
+        window.addEventListener('DOMContentLoaded', () => {
+            videoOverlay.classList.remove('hidden');
+            loadingText.textContent = "Haz clic en play para escuchar";
+        });
 
     </script>
 </body>
