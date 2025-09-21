@@ -247,3 +247,221 @@
   </script>
 </body>
 </html>
+2. Código Final para install-ios.html
+Este es un código nuevo y más organizado para la página de instrucciones de iOS. Cópialo y pégalo en el archivo install-ios.html que moviste a la raíz.
+
+HTML
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instalar en iOS</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #FFD700;
+            --secondary-color: #e0e0e0;
+            --background-color: #1a1a1a;
+            --card-bg-color: rgba(30, 30, 30, 0.7);
+            --dark-color: #222222;
+        }
+        body {
+            background-color: var(--background-color);
+            color: var(--secondary-color);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+            background-image: url('494615713_1348055410294820_9029691649736311255_n.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .container {
+            padding: 40px;
+            border-radius: 20px;
+            background-color: var(--card-bg-color);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        .steps {
+            text-align: left;
+            margin-top: 20px;
+            padding: 0 20px;
+        }
+        .step {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        .step i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s ease;
+        }
+        .back-button:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Instalar la Radio en tu iPhone</h1>
+        <div class="steps">
+            <div class="step">
+                <i class="fas fa-share-square"></i>
+                <p>En el navegador Safari, haz clic en el icono de **Compartir** en la parte inferior de la pantalla. Se parece a un cuadrado con una flecha que apunta hacia arriba.</p>
+            </div>
+            <div class="step">
+                <i class="fas fa-plus-circle"></i>
+                <p>Desplázate hacia abajo y selecciona **"Añadir a pantalla de inicio"**.</p>
+            </div>
+            <div class="step">
+                <i class="fas fa-check-circle"></i>
+                <p>Puedes cambiar el nombre si lo deseas y luego toca **"Añadir"** en la esquina superior derecha. La aplicación aparecerá en tu pantalla de inicio y podrás acceder a ella fácilmente.</p>
+            </div>
+        </div>
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Volver a la radio
+        </a>
+    </div>
+</body>
+</html>
+3. Código Final para install-android.html
+Este código también está organizado y listo para usar. Cópialo y pégalo en el archivo install-android.html que moviste a la raíz.
+
+HTML
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instalar en Android</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #FFD700;
+            --secondary-color: #e0e0e0;
+            --background-color: #1a1a1a;
+            --card-bg-color: rgba(30, 30, 30, 0.7);
+            --dark-color: #222222;
+        }
+        body {
+            background-color: var(--background-color);
+            color: var(--secondary-color);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+            background-image: url('494615713_1348055410294820_9029691649736311255_n.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .container {
+            padding: 40px;
+            border-radius: 20px;
+            background-color: var(--card-bg-color);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        .steps {
+            text-align: left;
+            margin-top: 20px;
+            padding: 0 20px;
+        }
+        .step {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        .step i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s ease;
+        }
+        .back-button:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Instalar la Radio en tu Android</h1>
+        <div class="steps">
+            <div class="step">
+                <i class="fas fa-ellipsis-v"></i>
+                <p>En el navegador Chrome, toca el icono de los **tres puntos verticales** en la esquina superior derecha.</p>
+            </div>
+            <div class="step">
+                <i class="fas fa-plus"></i>
+                <p>En el menú desplegable, selecciona **"Instalar aplicación"** o **"Añadir a pantalla de inicio"**.</p>
+            </div>
+            <div class="step">
+                <i class="fas fa-check-circle"></i>
+                <p>Confirma la instalación y la aplicación se añadirá a la pantalla principal de tu teléfono.</p>
+            </div>
+        </div>
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Volver a la radio
+        </a>
+    </div>
+</body>
+</html>
