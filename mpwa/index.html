@@ -4,10 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VISION STUDIOS RADIO</title>
+  
+  <link rel="manifest" href="manifest.json">
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(registration => {
+            console.log('Service Worker registrado con éxito:', registration);
+          })
+          .catch(error => {
+            console.log('Fallo en el registro del Service Worker:', error);
+          });
+      });
+    }
+  </script>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <style>
     :root {
       --primary-color: #FFD700;
@@ -82,7 +100,7 @@
       font-family: 'Poppins', sans-serif;
       animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite;
       color: white;
-      text-shadow: 0 0 5px black;
+      text-shadow: 2px 2px 4px black; /* Sombra en el texto */
     }
     h1 {
       font-size: 2rem;
