@@ -1,579 +1,303 @@
 <!DOCTYPE html>
-
 <html lang="es">
-
-<cabeza>
-
+<head>
   <meta charset="UTF-8">
-
-  <meta name="viewport" content="ancho=ancho-del-dispositivo, escala-inicial=1.0">
-
-  <title>RADIO VISIÓN ESTUDIOS</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VISION STUDIOS RADIO</title>
   
-
-  <link rel="manifiesto" href="manifiesto.json">
-
-  <guión>
-
-    if ('serviceWorker' en el navegador) {
-
-      ventana.addEventListener('cargar', () => {
-
-        navegador.serviceWorker.register('sw.js')
-
-          .then(registro => {
-
-            console.log('Service Worker registrado con éxito:', registro);
-
+  <link rel="manifest" href="manifest.json">
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(registration => {
+            console.log('Service Worker registrado con éxito:', registration);
           })
-
           .catch(error => {
-
             console.log('Fallo en el registro del Service Worker:', error);
-
           });
-
       });
-
     }
-
   </script>
-
   
-
-  <link rel="preconectar" href="https://fonts.googleapis.com">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="hoja de estilo">
-
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   
-
-  <link rel="hoja de estilo" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-
-  <estilo>
-
-    :raíz {
-
-      --color primario: #FFD700;
-
-      --color secundario: #e0e0e0;
-
-      --color de fondo: #1a1a1a;
-
+  <style>
+    :root {
+      --primary-color: #FFD700;
+      --secondary-color: #e0e0e0;
+      --background-color: #1a1a1a;
       --card-bg-color: rgba(30, 30, 30, 0.7);
-
-      --color oscuro: #222222;
-
+      --dark-color: #222222;
     }
-
-    cuerpo {
-
-      imagen de fondo: url('494615713_1348055410294820_9029691649736311255_n.jpg');
-
-      tamaño de fondo: portada;
-
-      posición de fondo: centro;
-
-      repetición de fondo: no repetir;
-
-      adjunto de fondo: fijo;
-
-      color de fondo: var(--color de fondo);
-
-      color: var(--color-secundario);
-
-      familia de fuentes: 'Poppins', sans-serif;
-
-      pantalla: flex;
-
-      flexión-dirección: columna;
-
-      justificar-contenido: centro;
-
-      alinear-elementos: centro;
-
-      altura mínima: 100vh;
-
-      margen: 0;
-
+    body {
+      background-image: url('494615713_1348055410294820_9029691649736311255_n.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-color: var(--background-color);
+      color: var(--secondary-color);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
     }
-
-    .contenedor-de-jugador {
-
-      alinear texto: centro;
-
-      relleno: 40px;
-
-      radio del borde: 20px;
-
-      color de fondo: var(--card-bg-color);
-
-      caja-sombra: 0 10px 20px rgba(0, 0, 0, 0.6);
-
-      filtro de fondo: desenfoque(10px);
-
-      borde: 1px sólido rgba(255, 255, 255, 0.1);
-
-      margen inferior: 20px;
-
+    .player-container {
+      text-align: center;
+      padding: 40px;
+      border-radius: 20px;
+      background-color: var(--card-bg-color);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
     }
-
-    .logo-contenedor {
-
-      margen inferior: 25px;
-
-      posición: relativa;
-
-      pantalla: bloque en línea;
-
+    .logo-container {
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
     }
-
-    .disco de vinilo {
-
-      ancho: 220px;
-
-      altura: 220px;
-
-      color de fondo: #0d0d0d;
-
-      radio del borde: 50%;
-
-      borde: 8px sólido var(--primary-color);
-
-      caja-sombra: inserción 0 0 15px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.5);
-
-      pantalla: flex;
-
-      justificar-contenido: centro;
-
-      alinear-elementos: centro;
-
-      animación: giro 6s lineal infinito;
-
+    .vinyl-record {
+      width: 220px;
+      height: 220px;
+      background-color: #0d0d0d;
+      border-radius: 50%;
+      border: 8px solid var(--primary-color);
+      box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: spin 6s linear infinite;
     }
-
-    .etiqueta-de-disco-de-vinilo {
-
-      ancho: 110px;
-
-      altura: 110px;
-
-      color de fondo: blanco;
-
-      radio del borde: 50%;
-
-      borde: 4px sólido var(--primary-color);
-
-      pantalla: flex;
-
-      justificar-contenido: centro;
-
-      alinear-elementos: centro;
-
+    .vinyl-record-label {
+      width: 110px;
+      height: 110px;
+      background-color: white;
+      border-radius: 50%;
+      border: 4px solid var(--primary-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-
-    .etiqueta-de-disco-de-vinilo img {
-
-      ancho: 90px;
-
-      altura: 90px;
-
-      radio del borde: 50%;
-
-      caja-sombra: 0 0 10px rgba(0, 0, 0, 0.5);
-
+    .vinyl-record-label img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
-
     h1, h2 {
-
-      desbordamiento: oculto;
-
-      espacio en blanco: nowrap;
-
-      margen: 0 automático;
-
-      familia de fuentes: 'Poppins', sans-serif;
-
-      animación: escribir 3,5 s pasos (30, fin), parpadeo-caret .75 s paso-fin infinito;
-
-      color: blanco;
-
-      sombra de texto: 2px 2px 4px negro;
-
+      overflow: hidden;
+      white-space: nowrap;
+      margin: 0 auto;
+      font-family: 'Poppins', sans-serif;
+      animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite;
+      color: white;
+      text-shadow: 2px 2px 4px black;
     }
-
     h1 {
-
-      tamaño de fuente: 2rem;
-
-      peso de fuente: 700;
-
-      margen superior: 0;
-
-      ancho: 16,5em;
-
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 0;
+      width: 16.5em;
     }
-
     h2 {
-
-      tamaño de fuente: 1.5rem;
-
-      peso de fuente: 400;
-
-      margen superior: 5px;
-
-      margen inferior: 30px;
-
-      ancho: 13,5em;
-
-      Retardo de animación: 3,5 s;
-
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-top: 5px;
+      margin-bottom: 30px;
+      width: 13.5em;
+      animation-delay: 3.5s;
     }
-
-    .botones de instalación, .iconos sociales {
-
-      margen superior: 25px;
-
-      pantalla: flex;
-
-      justificar-contenido: centro;
-
-      alinear-elementos: centro;
-
+    .install-buttons, .social-icons {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-
-    .botones de instalación a {
-
-      pantalla: bloque en línea;
-
-      radio del borde: 10px;
-
-      relleno: 12px 25px;
-
-      margen: 0 10px;
-
-      tamaño de fuente: 1.5rem;
-
-      peso de fuente: negrita;
-
-      transición: todos los 0,3 s de facilidad;
-
-      decoración de texto: ninguna;
-
+    .install-buttons a {
+      display: inline-block;
+      border-radius: 10px;
+      padding: 12px 25px;
+      margin: 0 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      text-decoration: none;
     }
-
-    .botones de instalación a:hover {
-
-      transformar: translateY(-3px);
-
+    .install-buttons a:hover {
+      transform: translateY(-3px);
     }
-
-    .botones de instalación .fa-apple {
-
-      color de fondo: blanco;
-
+    .install-buttons .fa-apple {
+      background-color: white;
       color: #0d0d0d;
-
     }
-
-    .botones de instalación .fa-android {
-
-      color de fondo: var(--color primario);
-
-      color: #0d0d0d;
-
+    /* Estilo para el botón de Android, ahora siempre visible si 'deferredPrompt' está disponible */
+    #install-android-btn {
+      background-color: var(--primary-color);
+      color: var(--dark-color);
+      border-radius: 10px;
+      padding: 12px 25px;
+      margin: 0 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      /* Por defecto oculto, se mostrará con JS si es instalable */
+      display: none; 
     }
-
-    #instalar-android-btn {
-
-      pantalla: ninguna;
-
-      color de fondo: var(--color primario);
-
-      color: var(--color-oscuro);
-
-      radio del borde: 10px;
-
-      relleno: 12px 25px;
-
-      margen: 0 10px;
-
-      tamaño de fuente: 1.5rem;
-
-      peso de fuente: negrita;
-
-      transición: todos los 0,3 s de facilidad;
-
-      decoración de texto: ninguna;
-
-      borde: ninguno;
-
-      cursor: puntero;
-
+    #install-android-btn:hover {
+      transform: translateY(-3px);
     }
-
-    #instalar-android-btn:hover {
-
-      transformar: translateY(-3px);
-
+    .social-icons a {
+      color: var(--secondary-color);
+      font-size: 2rem;
+      margin: 0 15px;
+      transition: color 0.3s ease, transform 0.2s ease;
     }
-
-    .iconos sociales a {
-
-      color: var(--color-secundario);
-
-      tamaño de fuente: 2rem;
-
-      margen: 0 15px;
-
-      transición: color 0,3 s facilidad, transformación 0,2 s facilidad;
-
+    .social-icons a:hover {
+      color: var(--primary-color);
+      transform: scale(1.2);
     }
-
-    .iconos sociales a:hover {
-
-      color: var(--color-primario);
-
-      transformar: escala(1.2);
-
+    .radio-player-custom {
+      margin-top: 30px;
     }
-
-    .reproductor de radio personalizado {
-
-      margen superior: 30px;
-
+    .play-button {
+      background: var(--primary-color);
+      color: var(--dark-color);
+      border: none;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
     }
-
-    .botón de reproducción {
-
-      fondo: var(--color-primario);
-
-      color: var(--color-oscuro);
-
-      borde: ninguno;
-
-      radio del borde: 50%;
-
-      ancho: 80px;
-
-      altura: 80px;
-
-      tamaño de fuente: 2.5rem;
-
-      cursor: puntero;
-
-      transición: transformación 0,2 s facilidad de entrada y salida, cuadro-sombra 0,3 s facilidad;
-
+    .play-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
     }
-
-    .botón de reproducción:hover {
-
-      transformar: escala(1.1);
-
-      caja-sombra: 0 0 15px rgba(255, 215, 0, 0.7);
-
+    .ad-banner {
+      width: 100%;
+      max-width: 500px;
+      height: 100px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 2px dashed var(--primary-color);
+      color: var(--secondary-color);
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      border-radius: 10px;
     }
-
-    .banner publicitario {
-
-      ancho: 100%;
-
-      ancho máximo: 500px;
-
-      altura: 100px;
-
-      color de fondo: rgba(255, 255, 255, 0.1);
-
-      borde: 2px discontinuo var(--primary-color);
-
-      color: var(--color-secundario);
-
-      tamaño de fuente: 1.2rem;
-
-      pantalla: flex;
-
-      justificar-contenido: centro;
-
-      alinear-elementos: centro;
-
-      margen superior: 20px;
-
-      radio del borde: 10px;
-
-    }
-
     audio {
-
-      pantalla: ninguna;
-
+      display: none;
     }
-
-    @keyframes girar {
-
-      desde { transformar: rotar(0deg); }
-
-      para { transformar: rotar(360deg); }
-
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
-
-    @keyframes escribiendo {
-
-      desde { ancho: 0 }
-
-      a { ancho: 100% }
-
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
     }
-
-    @keyframes parpadeo-caret {
-
-      desde, hasta { color del borde: transparente }
-
-      50% { color del borde: var(--color primario); }
-
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: var(--primary-color); }
     }
-
-  </estilo>
-
-</cabeza>
-
-<cuerpo>
-
-  <div class="contenedor-de-jugador">
-
-    <div class="contenedor-de-logotipo">
-
-      <div class="disco de vinilo">
-
-        <div class="etiqueta-de-disco-de-vinilo">
-
+  </style>
+</head>
+<body>
+  <div class="player-container">
+    <div class="logo-container">
+      <div class="vinyl-record">
+        <div class="vinyl-record-label">
           <img src="logo.png" alt="Logotipo de la Radio">
-
         </div>
-
       </div>
-
     </div>
-
-    RADIO VISIÓN ESTUDIOS
-
+    <h1>VISION STUDIOS RADIO</h1>
     <h2>LA FRECUENCIA VERDE</h2>
-
-    <div class="reproductor de radio personalizado">
-
-      <button id="reproducir-pausar-btn" class="botón-reproducir">
-
+    <div class="radio-player-custom">
+      <button id="play-pause-btn" class="play-button">
         <i class="fas fa-play"></i>
-
-      </botón>
-
+      </button>
       <audio id="audio-stream" src="https://stream.zeno.fm/4szh8g0tbaitv"></audio>
-
     </div>
-
-    <div class="botones-de-instalación">
-
+    <div class="install-buttons">
       <a href="install-ios.html" target="_blank"><i class="fab fa-apple"></i></a>
-
-      <button id="install-android-btn"><i class="fab fa-android"></i></button>
-
-    </div>
-
-    <div class="iconos-sociales">
-
+      <button id="install-android-btn"><i class="fab fa-android"></i> Instalar</button>     </div>
+    <div class="social-icons">
       <a href="URL_DE_TU_PAGINA_DE_FACEBOOK" target="_blank">
-
         <i class="fab fa-facebook-f"></i>
-
       </a>
-
     </div>
-
   </div>
-
-  <div class="banner publicitario">
-
+  <div class="ad-banner">
     ANÚNCIATE AQUÍ
-
   </div>
-
-  <guión>
-
+  <script>
     const audio = document.getElementById('audio-stream');
-
-    const playButton = document.getElementById('reproducir-pausa-btn');
-
-    playButton.addEventListener('clic', () => {
-
-      si (audio.pausado) {
-
-        audio.reproducir();
-
+    const playButton = document.getElementById('play-pause-btn');
+    playButton.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
         playButton.innerHTML = '<i class="fas fa-pause"></i>';
-
-      } demás {
-
-        audio.pausa();
-
+        document.querySelector('.vinyl-record').style.animationPlayState = 'running'; // Iniciar animación
+      } else {
+        audio.pause();
         playButton.innerHTML = '<i class="fas fa-play"></i>';
-
+        document.querySelector('.vinyl-record').style.animationPlayState = 'paused'; // Pausar animación
       }
-
     });
 
+    let deferredPrompt;
+    const installButton = document.getElementById('install-android-btn');
 
-
-    dejar diferidoPrompt;
-
-    const installButton = document.getElementById('instalar-android-btn');
-
-
-
-    ventana.addEventListener('beforeinstallprompt', (e) => {
-
+    window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
-
-      aviso diferido = e;
-
-      installButton.style.display = 'bloque en línea';
-
+      deferredPrompt = e;
+      installButton.style.display = 'inline-block'; // Mostrar el botón de instalación
+      console.log('Evento beforeinstallprompt disparado.');
     });
 
-
-
-    installButton.addEventListener('clic', (e) => {
-
-      installButton.style.display = 'ninguno';
-
-      si (deferredPrompt) {
-
+    installButton.addEventListener('click', (e) => {
+      if (deferredPrompt) {
         deferredPrompt.prompt();
-
         deferredPrompt.userChoice.then((choiceResult) => {
-
-          si (choiceResult.outcome === 'aceptado') {
-
-            console.log('El usuario ayudó la instalación');
-
-          } demás {
-
-            console.log('El usuario rechazará la instalación');
-
+          if (choiceResult.outcome === 'accepted') {
+            console.log('El usuario aceptó la instalación');
+          } else {
+            console.log('El usuario rechazó la instalación');
           }
-
-          deferredPrompt = nulo;
-
+          deferredPrompt = null;
+          installButton.style.display = 'none'; // Ocultar el botón después de la interacción
         });
-
+      } else {
+        // Si deferredPrompt no está disponible, el navegador ya no ofrece la instalación
+        // O la PWA ya está instalada. Puedes mostrar un mensaje al usuario.
+        alert('Para instalar la aplicación, usa la opción "Añadir a pantalla de inicio" en el menú de tu navegador.');
       }
-
     });
 
+    // Ocultar el botón si la PWA ya está instalada
+    window.addEventListener('appinstalled', () => {
+        installButton.style.display = 'none';
+        console.log('PWA instalada.');
+    });
+
+    // Pausar la animación del vinilo al inicio
+    document.querySelector('.vinyl-record').style.animationPlayState = 'paused';
   </script>
-
-</cuerpo>
-
+</body>
 </html>
