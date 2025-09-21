@@ -12,6 +12,9 @@
     
     <!-- Enlace al manifest (se generará dinámicamente con JavaScript) -->
     <link rel="manifest" href="" id="manifest-link">
+    
+    <!-- --- NUEVO: ICONO PARA IPHONE Y IPAD --- -->
+    <link rel="apple-touch-icon" href="logo.png">
 
     <style>
         body {
@@ -106,7 +109,7 @@
             </div>
         </div>
         
-        <!-- --- NUEVO: CONTENEDOR DE INSTALACIÓN INTELIGENTE --- -->
+        <!-- Contenedor de instalación inteligente -->
         <div class="mt-6 text-center">
             <!-- Botón de instalación para Android / Chrome Desktop -->
             <button id="install-btn" class="hidden bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded-lg inline-flex items-center transition">
@@ -139,7 +142,7 @@
         document.getElementById('manifest-link').setAttribute('href', manifestURL);
 
         const serviceWorkerCode = `
-            const CACHE_NAME = 'pwa-media-player-cache-v9';
+            const CACHE_NAME = 'pwa-media-player-cache-v10';
             const assetsToCache = ['/', '/index.html', '/logo.png']; 
             self.addEventListener('install', e => e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(assetsToCache))));
             self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
@@ -158,7 +161,6 @@
         // --- LÓGICA DEL REPRODUCTOR ---
         const STREAM_URL = "https://stream.zeno.fm/4szh8g0tbaitv";
         const player = document.getElementById('player');
-        // ... (resto de variables del reproductor) ...
         const playPauseBtn = document.getElementById('play-pause-btn');
         const playIcon = document.getElementById('play-icon');
         const pauseIcon = document.getElementById('pause-icon');
@@ -166,7 +168,7 @@
         const videoOverlay = document.getElementById('video-overlay');
         const loadingText = document.getElementById('loading-text');
 
-        // --- NUEVO: LÓGICA DE INSTALACIÓN INTELIGENTE ---
+        // --- LÓGICA DE INSTALACIÓN INTELIGENTE ---
         const installBtn = document.getElementById('install-btn');
         const iosInstallBanner = document.getElementById('ios-install-banner');
         let deferredPrompt;
@@ -195,7 +197,6 @@
         if (isIOS() && !isAppInstalled()) {
             iosInstallBanner.classList.remove('hidden');
         }
-        // --- FIN LÓGICA DE INSTALACIÓN ---
 
 
         function setPlayState(isPlaying) {
