@@ -80,7 +80,7 @@
     .vinyl-record-label {
       width: 110px;
       height: 110px;
-      background-color: white; /* <-- CAMBIO AQUÍ: Ahora es blanco */
+      background-color: white;
       border-radius: 50%;
       border: 4px solid var(--primary-color);
       display: flex;
@@ -144,7 +144,7 @@
       color: #0d0d0d;
     }
     #install-android-btn {
-      display: none; /* Se oculta por defecto */
+      display: none;
       background-color: var(--primary-color);
       color: var(--dark-color);
       border-radius: 10px;
@@ -185,4 +185,106 @@
       transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
     }
     .play-button:hover {
-      transform: scale(
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+    }
+    .ad-banner {
+      width: 100%;
+      max-width: 500px;
+      height: 100px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 2px dashed var(--primary-color);
+      color: var(--secondary-color);
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+    audio {
+      display: none;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: var(--primary-color); }
+    }
+  </style>
+</head>
+<body>
+  <div class="player-container">
+    <div class="logo-container">
+      <div class="vinyl-record">
+        <div class="vinyl-record-label">
+          <img src="logo.png" alt="Logotipo de la Radio">
+        </div>
+      </div>
+    </div>
+    <h1>VISION STUDIOS RADIO</h1>
+    <h2>LA FRECUENCIA VERDE</h2>
+    <div class="radio-player-custom">
+      <button id="play-pause-btn" class="play-button">
+        <i class="fas fa-play"></i>
+      </button>
+      <audio id="audio-stream" src="https://stream.zeno.fm/4szh8g0tbaitv"></audio>
+    </div>
+    <div class="install-buttons">
+      <a href="install-ios.html" target="_blank"><i class="fab fa-apple"></i></a>
+      <button id="install-android-btn"><i class="fab fa-android"></i></button>
+    </div>
+    <div class="social-icons">
+      <a href="URL_DE_TU_PAGINA_DE_FACEBOOK" target="_blank">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </div>
+  </div>
+  <div class="ad-banner">
+    ANÚNCIATE AQUÍ
+  </div>
+  <script>
+    const audio = document.getElementById('audio-stream');
+    const playButton = document.getElementById('play-pause-btn');
+    playButton.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playButton.innerHTML = '<i class="fas fa-pause"></i>';
+      } else {
+        audio.pause();
+        playButton.innerHTML = '<i class="fas fa-play"></i>';
+      }
+    });
+
+    let deferredPrompt;
+    const installButton = document.getElementById('install-android-btn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installButton.style.display = 'inline-block';
+    });
+
+    installButton.addEventListener('click', (e) => {
+      installButton.style.display = 'none';
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('El usuario aceptó la instalación');
+          } else {
+            console.log('El usuario rechazó la instalación');
+          }
+          deferredPrompt = null;
+        });
+      }
+    });
+  </script>
+</body>
+</html>
