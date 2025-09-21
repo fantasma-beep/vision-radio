@@ -68,8 +68,8 @@
         <div class="aspect-video bg-black flex items-center justify-center relative group">
             <audio id="player" class="w-full h-full" crossOrigin="anonymous"></audio>
             <div id="video-overlay" class="absolute inset-0 bg-black flex flex-col items-center justify-center text-center p-4">
-                 <!-- LOGO AÑADIDO AQUÍ -->
-                 <img src="https://i.imgur.com/8V5x02j.jpeg" alt="Vision Studios Logo" class="w-32 h-32 object-contain rounded-md">
+                 <!-- LOGO ACTUALIZADO PARA USAR EL ARCHIVO LOCAL -->
+                 <img src="logo.jpg" alt="Vision Studios Logo" class="w-32 h-32 object-contain rounded-md">
                 <h2 id="loading-text" class="text-xl font-bold mt-4 text-white">Cargando streaming...</h2>
             </div>
         </div>
@@ -115,9 +115,9 @@
             "name": "Vision Studios Multimedios", "short_name": "Vision", "start_url": ".", "display": "standalone",
             "background_color": "#1e293b", "theme_color": "#1e293b", "description": "Reproductor de Vision Studios.",
             "icons": [
-                // ICONOS DEL MANIFEST ACTUALIZADOS
-                { "src": "https://i.imgur.com/8V5x02j.jpeg", "type": "image/jpeg", "sizes": "192x192" },
-                { "src": "https://i.imgur.com/8V5x02j.jpeg", "type": "image/jpeg", "sizes": "512x512" }
+                // ICONOS DEL MANIFEST ACTUALIZADOS PARA USAR EL ARCHIVO LOCAL
+                { "src": "logo.jpg", "type": "image/jpeg", "sizes": "192x192" },
+                { "src": "logo.jpg", "type": "image/jpeg", "sizes": "512x512" }
             ]
         };
         const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
@@ -125,8 +125,9 @@
         document.getElementById('manifest-link').setAttribute('href', manifestURL);
 
         const serviceWorkerCode = `
-            const CACHE_NAME = 'pwa-media-player-cache-v3';
-            self.addEventListener('install', e => e.waitUntil(caches.open(CACHE_NAME).then(c => c.add('/'))));
+            const CACHE_NAME = 'pwa-media-player-cache-v4'; // Versión actualizada
+            const assetsToCache = ['/', '/index.html', '/logo.jpg'];
+            self.addEventListener('install', e => e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(assetsToCache))));
             self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
         `;
         const swBlob = new Blob([serviceWorkerCode], { type: 'application/javascript' });
@@ -142,9 +143,8 @@
 
         // --- LÓGICA DEL REPRODUCTOR ---
         
-        // --- ¡IMPORTANTE! ---
-        // --- RECUERDA COLOCAR TU URL DE STREAMING AQUÍ ---
-        const STREAM_URL = "https://stream.zeno.fm/f773gx7h268uv";
+        // --- URL DE STREAMING ACTUALIZADA ---
+        const STREAM_URL = "https://stream.zeno.fm/4szh8g0tbaitv";
 
         const player = document.getElementById('player');
         const playPauseBtn = document.getElementById('play-pause-btn');
@@ -213,4 +213,5 @@
     </script>
 </body>
 </html>
+
 
