@@ -49,6 +49,7 @@
       align-items: center;
       min-height: 100vh;
       margin: 0;
+      overflow-x: hidden; /* Evitar scroll horizontal si los títulos son muy anchos */
     }
     .player-container {
       text-align: center;
@@ -59,6 +60,8 @@
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       margin-bottom: 20px;
+      max-width: 90%; /* Ajuste para pantallas más pequeñas */
+      box-sizing: border-box; /* Incluir padding y border en el ancho total */
     }
     .logo-container {
       margin-bottom: 25px;
@@ -95,25 +98,86 @@
     }
     h1, h2 {
       overflow: hidden;
-      white-space: nowrap;
+      white-space: nowrap; /* Mantiene el texto en una sola línea */
       margin: 0 auto;
       font-family: 'Poppins', sans-serif;
-      animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite;
+      animation: typing 3.5s steps(30, end) forwards, blink-caret .75s step-end infinite;
       color: white;
       text-shadow: 2px 2px 4px black;
+      max-width: 100%; /* Asegura que no desborde el contenedor */
     }
     h1 {
       font-size: 2rem;
       font-weight: 700;
       margin-top: 0;
-      width: 16.5em;
+      /* width: 16.5em; */ /* Comentado para permitir ajuste responsivo si el texto es largo */
     }
     h2 {
       font-size: 1.5rem;
       font-weight: 400;
       margin-top: 5px;
       margin-bottom: 30px;
-      width: 13.5em;
+      /* width: 13.5em; */ /* Comentado */
       animation-delay: 3.5s;
     }
+    /* Media queries para ajustar el tamaño de fuente y anchos en pantallas pequeñas */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+        /* Ajustar el width si quieres que siga el efecto typing preciso */
+        /* width: 11em; */
+      }
+      h2 {
+        font-size: 1.1rem;
+        /* width: 9em; */
+      }
+      .player-container {
+        padding: 20px;
+      }
+      .vinyl-record {
+        width: 180px;
+        height: 180px;
+        border-width: 6px;
+      }
+      .vinyl-record-label {
+        width: 90px;
+        height: 90px;
+        border-width: 3px;
+      }
+      .vinyl-record-label img {
+        width: 75px;
+        height: 75px;
+      }
+      .play-button {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+      }
+      .install-buttons a, #install-android-btn {
+        padding: 10px 20px;
+        font-size: 1.2rem;
+      }
+      .social-icons a {
+        font-size: 1.8rem;
+        margin: 0 10px;
+      }
+    }
+
     .install-buttons, .social-icons {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap; /* Permitir que los botones envuelvan en pantallas pequeñas */
+    }
+    .install-buttons a {
+      display: inline-block;
+      border-radius: 10px;
+      padding: 12px 25px;
+      margin: 0 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .install-buttons a:hover {
