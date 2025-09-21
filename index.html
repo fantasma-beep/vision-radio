@@ -14,7 +14,13 @@
     <link rel="manifest" href="" id="manifest-link">
 
     <style>
-        /* Estilos personalizados para la barra de progreso y el volumen */
+        body {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.98)), url('https://images.unsplash.com/photo-1590602847991-9d6245b37410?auto=format&fit=crop&w=1920');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
         input[type=range] {
             -webkit-appearance: none;
             appearance: none;
@@ -27,7 +33,6 @@
             outline: none;
         }
 
-        /* Estilo para el track (la barra) */
         input[type=range]::-webkit-slider-runnable-track {
             background-color: #475569;
             border-radius: 0.5rem;
@@ -39,11 +44,10 @@
             height: 0.5rem;
         }
 
-        /* Estilo para el thumb (el círculo que se desliza) */
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            margin-top: -6px; /* Centrar verticalmente */
+            margin-top: -6px;
             background-color: #f1f5f9;
             border-radius: 50%;
             height: 1.25rem;
@@ -62,51 +66,62 @@
 </head>
 <body class="bg-slate-900 text-slate-200 flex items-center justify-center min-h-screen font-sans antialiased p-4">
 
-    <div class="w-full max-w-md bg-slate-800 rounded-2xl shadow-2xl overflow-hidden">
-        
-        <!-- Pantalla del reproductor con el nuevo logo -->
-        <div class="aspect-video bg-black flex items-center justify-center relative group">
-            <audio id="player" class="w-full h-full" crossOrigin="anonymous"></audio>
-            <div id="video-overlay" class="absolute inset-0 bg-black flex flex-col items-center justify-center text-center p-4">
-                 <!-- LOGO ACTUALIZADO PARA USAR EL ARCHIVO LOCAL -->
-                 <img src="logo.jpg" alt="Vision Studios Logo" class="w-32 h-32 object-contain rounded-md">
-                <h2 id="loading-text" class="text-xl font-bold mt-4 text-white">Cargando streaming...</h2>
-            </div>
-        </div>
-
-        <!-- Información de la pista actual -->
-        <div class="p-4 text-center border-b border-slate-700">
-            <h3 id="track-title" class="font-bold text-lg truncate">Vision Studios</h3>
-            <p id="track-artist" class="text-sm text-slate-400">Multimedios</p>
-        </div>
-
-        <!-- Controles -->
-        <div class="p-4 space-y-4 bg-slate-800/50">
-            <!-- Barra de progreso (menos útil para streaming en vivo) -->
-            <div class="flex items-center gap-2">
-                <span id="current-time" class="text-xs w-10 text-center">--:--</span>
-                <div class="w-full text-center text-xs text-slate-400">STREAMING EN VIVO</div>
-                <span id="total-time" class="text-xs w-10 text-center">--:--</span>
-            </div>
-
-            <!-- Botones principales y volumen -->
-            <div class="flex items-center justify-between">
-                 <div class="w-1/4">
-                     <!-- Espacio en blanco -->
-                 </div>
-                 <div class="flex items-center gap-4 w-1/2 justify-center">
-                    <button id="play-pause-btn" class="p-4 bg-indigo-600 rounded-full hover:bg-indigo-500 active:scale-95 transition-transform disabled:opacity-50 disabled:bg-slate-600">
-                        <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8.002v4.005a1 1 0 001.555.832l3.198-2.003a1 1 0 000-1.664l-3.198-2.003z" clip-rule="evenodd"/></svg>
-                        <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 hidden" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
-                    </button>
+    <div class="w-full max-w-md">
+        <!-- Contenedor del reproductor -->
+        <div class="bg-slate-800/90 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden border border-slate-700">
+            
+            <div class="aspect-video bg-black/50 flex items-center justify-center relative group">
+                <audio id="player" class="w-full h-full" crossOrigin="anonymous"></audio>
+                <div id="video-overlay" class="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
+                     <img src="logo.png" alt="Vision Studios Logo" class="w-32 h-32 object-contain rounded-md shadow-lg">
+                    <h2 id="loading-text" class="text-xl font-bold mt-4 text-white">Cargando streaming...</h2>
                 </div>
-                <div class="w-1/4 flex items-center justify-end gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" viewBox="0 0 20 20" fill="currentColor"><path d="M5.071 8.238a.75.75 0 01.093-1.055l1.5-1.5A.75.75 0 017.72 6.74l-1.5 1.5a.75.75 0 01-1.054.093zm.593 4.586a.75.75 0 011.06-1.06l1.25 1.25a.75.75 0 11-1.06 1.06l-1.25-1.25zM12 8a1 1 0 100-2 1 1 0 000 2zM4 10a1 1 0 11-2 0 1 1 0 012 0zm11.13-1.13a.75.75 0 10-1.06-1.06l-1.25 1.25a.75.75 0 001.06 1.06l1.25-1.25zM12 4a1 1 0 100 2 1 1 0 000-2zm-8 6a1 1 0 100 2 1 1 0 000-2z"/></svg>
-                    <input type="range" id="volume-control" value="100" min="0" max="100" class="w-24">
+            </div>
+
+            <div class="p-4 text-center border-b border-slate-700">
+                <h3 id="track-title" class="font-bold text-lg truncate">Vision Studios</h3>
+                <p id="track-artist" class="text-sm text-slate-400">Multimedios</p>
+            </div>
+
+            <div class="p-4 space-y-4">
+                <div class="flex items-center gap-2">
+                    <span id="current-time" class="text-xs w-10 text-center">--:--</span>
+                    <div class="w-full text-center text-xs text-slate-400">STREAMING EN VIVO</div>
+                    <span id="total-time" class="text-xs w-10 text-center">--:--</span>
+                </div>
+
+                <div class="flex items-center justify-between">
+                     <div class="w-1/4"></div>
+                     <div class="flex items-center gap-4 w-1/2 justify-center">
+                        <button id="play-pause-btn" class="p-4 bg-indigo-600 rounded-full hover:bg-indigo-500 active:scale-95 transition-transform disabled:opacity-50 disabled:bg-slate-600">
+                            <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8.002v4.005a1 1 0 001.555.832l3.198-2.003a1 1 0 000-1.664l-3.198-2.003z" clip-rule="evenodd"/></svg>
+                            <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 hidden" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                        </button>
+                    </div>
+                    <div class="w-1/4 flex items-center justify-end gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" viewBox="0 0 20 20" fill="currentColor"><path d="M5.071 8.238a.75.75 0 01.093-1.055l1.5-1.5A.75.75 0 017.72 6.74l-1.5 1.5a.75.75 0 01-1.054.093zm.593 4.586a.75.75 0 011.06-1.06l1.25 1.25a.75.75 0 11-1.06 1.06l-1.25-1.25zM12 8a1 1 0 100-2 1 1 0 000 2zM4 10a1 1 0 11-2 0 1 1 0 012 0zm11.13-1.13a.75.75 0 10-1.06-1.06l-1.25 1.25a.75.75 0 001.06 1.06l1.25-1.25zM12 4a1 1 0 100 2 1 1 0 000-2zm-8 6a1 1 0 100 2 1 1 0 000-2z"/></svg>
+                        <input type="range" id="volume-control" value="100" min="0" max="100" class="w-24">
+                    </div>
                 </div>
             </div>
         </div>
         
+        <!-- --- NUEVO: CONTENEDOR DE INSTALACIÓN INTELIGENTE --- -->
+        <div class="mt-6 text-center">
+            <!-- Botón de instalación para Android / Chrome Desktop -->
+            <button id="install-btn" class="hidden bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded-lg inline-flex items-center transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                <span>Instalar Aplicación</span>
+            </button>
+
+            <!-- Banner de ayuda para iPhone / iPad -->
+            <div id="ios-install-banner" class="hidden bg-slate-700 p-3 rounded-lg text-white text-sm flex items-center justify-center gap-3 animate-pulse">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                <span class="text-left">Para instalar la app, toca el botón de <strong>Compartir</strong> y luego <strong>"Agregar a la pantalla de inicio"</strong>.</span>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -115,9 +130,8 @@
             "name": "Vision Studios Multimedios", "short_name": "Vision", "start_url": ".", "display": "standalone",
             "background_color": "#1e293b", "theme_color": "#1e293b", "description": "Reproductor de Vision Studios.",
             "icons": [
-                // ICONOS DEL MANIFEST ACTUALIZADOS PARA USAR EL ARCHIVO LOCAL
-                { "src": "logo.jpg", "type": "image/jpeg", "sizes": "192x192" },
-                { "src": "logo.jpg", "type": "image/jpeg", "sizes": "512x512" }
+                { "src": "logo.png", "type": "image/png", "sizes": "192x192" },
+                { "src": "logo.png", "type": "image/png", "sizes": "512x512" }
             ]
         };
         const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
@@ -125,8 +139,8 @@
         document.getElementById('manifest-link').setAttribute('href', manifestURL);
 
         const serviceWorkerCode = `
-            const CACHE_NAME = 'pwa-media-player-cache-v4'; // Versión actualizada
-            const assetsToCache = ['/', '/index.html', '/logo.jpg'];
+            const CACHE_NAME = 'pwa-media-player-cache-v9';
+            const assetsToCache = ['/', '/index.html', '/logo.png']; 
             self.addEventListener('install', e => e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(assetsToCache))));
             self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
         `;
@@ -142,18 +156,48 @@
         }
 
         // --- LÓGICA DEL REPRODUCTOR ---
-        
-        // --- URL DE STREAMING ACTUALIZADA ---
         const STREAM_URL = "https://stream.zeno.fm/4szh8g0tbaitv";
-
         const player = document.getElementById('player');
+        // ... (resto de variables del reproductor) ...
         const playPauseBtn = document.getElementById('play-pause-btn');
         const playIcon = document.getElementById('play-icon');
         const pauseIcon = document.getElementById('pause-icon');
         const volumeControl = document.getElementById('volume-control');
         const videoOverlay = document.getElementById('video-overlay');
         const loadingText = document.getElementById('loading-text');
+
+        // --- NUEVO: LÓGICA DE INSTALACIÓN INTELIGENTE ---
+        const installBtn = document.getElementById('install-btn');
+        const iosInstallBanner = document.getElementById('ios-install-banner');
+        let deferredPrompt;
         
+        const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isAppInstalled = () => window.matchMedia('(display-mode: standalone)').matches;
+
+        // Listener para navegadores compatibles (Chrome, Edge, etc.)
+        window.addEventListener('beforeinstallprompt', (e) => {
+          if (isAppInstalled()) return;
+          e.preventDefault();
+          deferredPrompt = e;
+          installBtn.classList.remove('hidden');
+        });
+
+        installBtn.addEventListener('click', async () => {
+          if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            deferredPrompt = null;
+            installBtn.classList.add('hidden');
+          }
+        });
+
+        // Mostrar banner de ayuda si es iOS y la app no está instalada
+        if (isIOS() && !isAppInstalled()) {
+            iosInstallBanner.classList.remove('hidden');
+        }
+        // --- FIN LÓGICA DE INSTALACIÓN ---
+
+
         function setPlayState(isPlaying) {
             if (isPlaying) {
                 playIcon.classList.add('hidden');
@@ -173,7 +217,7 @@
                     setPlayState(true);
                 })
                 .catch(error => {
-                    console.log("La reproducción automática fue bloqueada. El usuario debe iniciarla manualmente.");
+                    console.log("La reproducción automática fue bloqueada.");
                     loadingText.textContent = "Haz clic en play para escuchar";
                     setPlayState(false); 
                 });
@@ -213,5 +257,6 @@
     </script>
 </body>
 </html>
+
 
 
