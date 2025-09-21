@@ -25,7 +25,7 @@
       text-align: center;
       padding: 30px;
       border-radius: 15px;
-      background-color: rgba(30, 30, 30, 0.85);
+      background-color: rgba(255, 255, 255, 0.85);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(5px);
     }
@@ -98,6 +98,7 @@
       border-radius: 5px;
       font-weight: bold;
       transition: background-color 0.3s ease;
+      font-size: 1.5rem;
     }
     .install-buttons a:hover {
       background-color: #00e600;
@@ -114,11 +115,25 @@
     .social-icons a:hover {
       color: #00e600;
     }
+    .radio-player-custom {
+      margin-top: 25px;
+    }
+    .play-button {
+      background: #00ff00;
+      color: #121212;
+      border: none;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+    .play-button:hover {
+      transform: scale(1.1);
+    }
     audio {
-      width: 80vw;
-      max-width: 400px;
-      background-color: #333;
-      border-radius: 5px;
+      display: none;
     }
     @keyframes spin {
       from { transform: rotate(0deg); }
@@ -145,13 +160,15 @@
     </div>
     <h1>VISION STUDIOS RADIO</h1>
     <h2>LA FRECUENCIA VERDE</h2>
-    <audio controls autoplay>
-      <source src="https://stream.zeno.fm/4szh8g0tbaitv" type="audio/mpeg">
-      Tu navegador no soporta el reproductor de audio.
-    </audio>
+    <div class="radio-player-custom">
+      <button id="play-pause-btn" class="play-button">
+        <i class="fas fa-play"></i>
+      </button>
+      <audio id="audio-stream" src="https://stream.zeno.fm/4szh8g0tbaitv"></audio>
+    </div>
     <div class="install-buttons">
-      <a href="#">Instalar en iOS</a>
-      <a href="#">Instalar en Android</a>
+      <a href="#"><i class="fab fa-apple"></i></a>
+      <a href="#"><i class="fab fa-android"></i></a>
     </div>
     <div class="social-icons">
       <a href="URL_DE_TU_PAGINA_DE_FACEBOOK" target="_blank">
@@ -159,5 +176,19 @@
       </a>
     </div>
   </div>
+  <script>
+    const audio = document.getElementById('audio-stream');
+    const playButton = document.getElementById('play-pause-btn');
+
+    playButton.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playButton.innerHTML = '<i class="fas fa-pause"></i>';
+      } else {
+        audio.pause();
+        playButton.innerHTML = '<i class="fas fa-play"></i>';
+      }
+    });
+  </script>
 </body>
 </html>
