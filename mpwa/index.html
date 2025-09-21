@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VISION STUDIOS RADIO</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       background-image: url('https://raw.githubusercontent.com/fantasma-beep/vision-radio/main/494615713_1348055410294820_9029691649736311255_n.jpg');
@@ -13,7 +14,7 @@
       background-attachment: fixed;
       background-color: #121212;
       color: #ffffff;
-      font-family: Arial, sans-serif;
+      font-family: monospace;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -28,26 +29,90 @@
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(5px);
     }
-    .logo {
+    .logo-container {
       margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
     }
-    .logo img {
-      max-width: 150px;
-      height: auto;
+    .vinyl-record {
+      width: 200px;
+      height: 200px;
+      background-color: #111;
       border-radius: 50%;
-      border: 3px solid #00ff00; /* Color verde del círculo */
+      border: 10px solid #222;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8), 0 0 5px rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: spin 3s linear infinite;
+    }
+    .vinyl-record-label {
+      width: 100px;
+      height: 100px;
+      background-color: #00ff00;
+      border-radius: 50%;
+      border: 5px solid #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .vinyl-record-label img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+    h1, h2 {
+      overflow: hidden;
+      border-right: .15em solid #00ff00;
+      white-space: nowrap;
+      margin: 0 auto;
+      animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite;
     }
     h1 {
       font-size: 1.8rem;
       margin-top: 0;
-      margin-bottom: 5px; /* Espacio más pequeño entre título y subtítulo */
-      color: #00ff00; /* Color verde del título */
+      width: 16.5em;
+      color: #00ff00;
     }
     h2 {
       font-size: 1.2rem;
-      margin-top: 0;
+      margin-top: 5px;
       margin-bottom: 25px;
-      color: #00ff00; /* Color verde del subtítulo */
+      width: 13.5em;
+      color: #00ff00;
+      animation-delay: 3.5s;
+    }
+    .install-buttons {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .install-buttons a {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 0 10px;
+      background-color: #00ff00;
+      color: #121212;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .install-buttons a:hover {
+      background-color: #00e600;
+    }
+    .social-icons {
+      margin-top: 20px;
+    }
+    .social-icons a {
+      color: #00ff00;
+      font-size: 2rem;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+    .social-icons a:hover {
+      color: #00e600;
     }
     audio {
       width: 80vw;
@@ -55,12 +120,28 @@
       background-color: #333;
       border-radius: 5px;
     }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #00ff00; }
+    }
   </style>
 </head>
 <body>
   <div class="player-container">
-    <div class="logo">
-      <img src="https://raw.githubusercontent.com/fantasma-beep/vision-radio/main/fondo%20blanco.png" alt="Logotipo de la Radio">
+    <div class="logo-container">
+      <div class="vinyl-record">
+        <div class="vinyl-record-label">
+          <img src="https://raw.githubusercontent.com/fantasma-beep/vision-radio/main/fondo%20blanco.png" alt="Logotipo de la Radio">
+        </div>
+      </div>
     </div>
     <h1>VISION STUDIOS RADIO</h1>
     <h2>LA FRECUENCIA VERDE</h2>
@@ -68,6 +149,15 @@
       <source src="https://stream.zeno.fm/4szh8g0tbaitv" type="audio/mpeg">
       Tu navegador no soporta el reproductor de audio.
     </audio>
+    <div class="install-buttons">
+      <a href="#">Instalar en iOS</a>
+      <a href="#">Instalar en Android</a>
+    </div>
+    <div class="social-icons">
+      <a href="URL_DE_TU_PAGINA_DE_FACEBOOK" target="_blank">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </div>
   </div>
 </body>
 </html>
