@@ -24,23 +24,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   
   <style>
     :root {
-      --primary-color: #FFD700;
-      --secondary-color: #e0e0e0;
-      --background-color: #1a1a1a;
-      --card-bg-color: rgba(30, 30, 30, 0.7);
-      --dark-color: #222222;
+      --primary-color: #FFD700; /* Dorado */
+      --secondary-color: #e0e0e0; /* Gris claro para texto */
+      --background-color: #1a1a1a; /* Fondo oscuro principal */
+      --card-bg-color: rgba(30, 30, 30, 0.7); /* Fondo de tarjeta translúcido */
+      --dark-color: #222222; /* Color oscuro para algunos elementos */
     }
     body {
-      background-image: url('494615713_1348055410294820_9029691649736311255_n.jpg');
+      background-image: url('494615713_1348055410294820_9029691649736311255_n.jpg'); /* Tu imagen de fondo */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       background-attachment: fixed;
-      background-color: var(--background-color);
+      background-color: var(--background-color); /* Fallback si la imagen no carga */
       color: var(--secondary-color);
       font-family: 'Poppins', sans-serif;
       display: flex;
@@ -49,6 +49,7 @@
       align-items: center;
       min-height: 100vh;
       margin: 0;
+      overflow-x: hidden; /* Previene el scroll horizontal */
     }
     .player-container {
       text-align: center;
@@ -56,9 +57,11 @@
       border-radius: 20px;
       background-color: var(--card-bg-color);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px); /* Efecto de cristal esmerilado */
       border: 1px solid rgba(255, 255, 255, 0.1);
       margin-bottom: 20px;
+      max-width: 90%; /* Ajuste para responsividad */
+      box-sizing: border-box;
     }
     .logo-container {
       margin-bottom: 25px;
@@ -76,75 +79,11 @@
       justify-content: center;
       align-items: center;
       animation: spin 6s linear infinite;
+      /* Por defecto la animación se pausará con JS al cargar */
     }
     .vinyl-record-label {
       width: 110px;
       height: 110px;
       background-color: white;
       border-radius: 50%;
-      border: 4px solid var(--primary-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .vinyl-record-label img {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-    h1, h2 {
-      overflow: hidden;
-      white-space: nowrap;
-      margin: 0 auto;
-      font-family: 'Poppins', sans-serif;
-      animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite;
-      color: white;
-      text-shadow: 2px 2px 4px black;
-    }
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-top: 0;
-      width: 16.5em;
-    }
-    h2 {
-      font-size: 1.5rem;
-      font-weight: 400;
-      margin-top: 5px;
-      margin-bottom: 30px;
-      width: 13.5em;
-      animation-delay: 3.5s;
-    }
-    .install-buttons, .social-icons {
-      margin-top: 25px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .install-buttons a {
-      display: inline-block;
-      border-radius: 10px;
-      padding: 12px 25px;
-      margin: 0 10px;
-      font-size: 1.5rem;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-    .install-buttons a:hover {
-      transform: translateY(-3px);
-    }
-    .install-buttons .fa-apple {
-      background-color: white;
-      color: #0d0d0d;
-    }
-    #install-android-btn {
-      background-color: var(--primary-color);
-      color: var(--dark-color);
-      border-radius: 10px;
-      padding: 12px 25px;
-      margin: 0 10px;
-      font-size: 1.5rem;
-      font-weight: bold;
-      transition: all
+      border:
